@@ -8,9 +8,10 @@ import {
   Text,
   TextInput,
   Switch,
+  TouchableOpacity,
 } from "react-native";
 
-function CreateProfilePage(props) {
+const CreateProfilePage = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const [selectedGoal, setSelectedGoal] = useState();
@@ -123,6 +124,14 @@ function CreateProfilePage(props) {
                 />
               </Picker>
             </View>
+            <TouchableOpacity style={styles.loginButton1}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Log In')}
+                style={styles.buttonRectangle1}
+              >
+                <Text style={styles.submit}>S U B M I T</Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
           </ImageBackground>
         </View>
       </View>
@@ -149,6 +158,30 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(53,46,46,1)",
     opacity: 0.43,
   },
+
+  loginButton1: {
+    width: 283,
+    height: 49,
+    marginTop: 510,
+    marginLeft: 155,
+  },
+
+  buttonRectangle1: {
+    backgroundColor: "#10100f",
+    borderRadius: 50,
+    flex:1 ,
+  },
+
+  submit: {
+    //fontFamily: "roboto-700",
+     color: "rgba(255,255,255,1)",
+     fontSize: 25,
+     height: 41,
+     width: 120,
+     marginTop: 10,
+     marginLeft: 90,
+   },
+
   image1: {
     top: 0,
     left: 0,
@@ -158,11 +191,11 @@ const styles = StyleSheet.create({
   },
   image1_imageStyle: {},
   createYourProfile: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "Roboto",
     color: "rgba(255,255,255,1)",
     fontSize: 33,
     textAlign: "center",
-    marginTop: 280,
+    marginTop: 240,
     marginLeft: 0,
   },
   data: {
@@ -171,8 +204,9 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginLeft: 164,
   },
+  
   firstName: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "Roboto",
     color: "#121212",
     height: 55,
     fontSize: 23,
@@ -185,7 +219,7 @@ const styles = StyleSheet.create({
     marginTop: 27,
   },
   secondName: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "Roboto",
     color: "#121212",
     height: 55,
     fontSize: 23,
@@ -198,7 +232,7 @@ const styles = StyleSheet.create({
     marginTop: 28,
   },
   age: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "Roboto",
     color: "#121212",
     height: 48,
     width: 122,
@@ -214,7 +248,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     position: "absolute",
-    fontFamily: "roboto-300",
+    //fontFamily: "Roboto",
     color: "rgba(255,255,255,1)",
     height: 50,
     width: 40,
@@ -234,7 +268,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   feminin: {
-    fontFamily: "roboto-300",
+    //fontFamily: "Roboto",
     color: "rgba(255,255,255,1)",
     height: 50,
     width: 40,
@@ -249,7 +283,7 @@ const styles = StyleSheet.create({
     marginRight: -29,
   },
   secondName2: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "Roboto",
     color: "#121212",
     height: 50,
     width: 243,
@@ -264,7 +298,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   },
   secondName1: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "Roboto",
     color: "#121212",
     height: 50,
     width: 243,
@@ -283,7 +317,7 @@ const styles = StyleSheet.create({
     height: 1194,
   },
   selectYourGoal: {
-    fontFamily: "roboto-300",
+    //fontFamily: "Roboto",
     color: "rgba(255,255,255,1)",
     height: 30,
     width: 243,
@@ -292,8 +326,8 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   picker: {
-    marginTop: -25,
-    fontFamily: "system",
+    marginTop: -80,
+    //fontFamily: "Roboto",
   },
 });
 

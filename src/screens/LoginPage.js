@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   StyleSheet,
   View,
@@ -7,9 +8,14 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Button
 } from "react-native";
 
-function LoginPage(props) {
+import HomePage from "./HomePage";
+import RegisterPage from "./RegisterPage";
+
+
+const LoginPage = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.background}>
@@ -24,7 +30,13 @@ function LoginPage(props) {
               <View style={styles.containerSignUp}>
                 <View style={styles.newMemberStack}>
                   <Text style={styles.newMember}>New Member ?</Text>
-                  <Text style={styles.signUp}>Sign up</Text>
+                  <View style={styles.signUp}>
+                  <Button 
+                  title = "Sign In"
+                  color = "rgba(255,0,70,1)"
+                  onPress={() => navigation.navigate('Register')}
+                  />
+                  </View>
                 </View>
               </View>
             </View>
@@ -59,7 +71,7 @@ function LoginPage(props) {
           </View>
           <TouchableOpacity style={styles.loginButton}>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate("Untitled")}
+              onPress={() => navigation.navigate('Home')}
               style={styles.buttonRectangle}
             >
               <Text style={styles.loginText}>Login</Text>
@@ -80,7 +92,7 @@ const styles = StyleSheet.create({
   background: {
     width: 445,
     height: 790,
-    marginTop: 35,
+    marginTop: -10,
     marginLeft: -47,
   },
   image: {
@@ -104,29 +116,34 @@ const styles = StyleSheet.create({
     marginRight: -25,
   },
   newMember: {
-    top: 2,
+    top: 7,
     left: 15,
     position: "absolute",
-    fontFamily: "roboto-regular",
-    color: "rgba(255,0,109,1)",
-    height: 35,
-    width: 199,
-    fontSize: 25,
+    //fontFamily: "roboto-700",
+    color: "rgba(255,0,70,1)",
+    height: 150,
+    width: 150,
+    fontSize: 20,
   },
   signUp: {
-    top: 3,
+    top: 0,
     left: 210,
-    position: "absolute",
-    fontFamily: "roboto-700",
+    //position: "absolute",
+    //fontFamily: "roboto-700",
     color: "rgba(255,0,109,1)",
-    height: 35,
-    width: 121,
+    height: 47,
+    width: 74,
+    fontSize: 50,
+    marginTop: -3,
+    marginLeft: 3,
     fontSize: 25,
+    padding: 2,
+    backgroundColor: "pink",
   },
   newMemberStack: {
-    width: 309,
-    height: 39,
-    marginTop: 5,
+    width: 250,
+    height: 35,
+    marginTop: 3,
     marginLeft: 38,
   },
   title: {
@@ -141,7 +158,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     position: "absolute",
-    fontFamily: "verdana-regular",
+    //fontFamily: "roboto-700",
     color: "rgba(46,255,0,1)",
     height: 135,
     width: 212,
@@ -152,7 +169,7 @@ const styles = StyleSheet.create({
     top: 15,
     left: 157,
     position: "absolute",
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "rgba(46,255,0,1)",
     height: 120,
     width: 126,
@@ -162,7 +179,7 @@ const styles = StyleSheet.create({
     top: 70,
     left: 157,
     position: "absolute",
-    fontFamily: "roboto-regular",
+   // fontFamily: "roboto-700",
     color: "rgba(20,255,0,1)",
     height: 45,
     width: 110,
@@ -182,7 +199,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   emailAddress: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "#121212",
     height: 46,
     fontSize: 23,
@@ -195,8 +212,7 @@ const styles = StyleSheet.create({
     marginTop: 80,
   },
   password: {
-    fontFamily: "roboto-regular",
-    color: "#121212",
+    //fontFamily: "roboto-700",
     fontSize: 23,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,1)",
@@ -220,7 +236,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   loginText: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "rgba(255,0,70,1)",
     fontSize: 25,
     height: 41,
