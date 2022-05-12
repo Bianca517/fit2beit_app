@@ -9,7 +9,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-function RegisterPage(props) {
+import CreateProfilePage from "./CreateProfilePage";
+
+const RegisterPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.background}>
@@ -57,8 +59,10 @@ function RegisterPage(props) {
             </View>
             <TouchableOpacity style={styles.loginButton1}>
               <TouchableOpacity
-                onPress={() => props.navigation.navigate("Untitled")}
+                onPress={() => navigation.navigate("Create Profile")}
                 style={styles.buttonRectangle1}
+                title="S U B M I T"
+                color="white"
               >
                 <Text style={styles.nEXT}>N E X T</Text>
               </TouchableOpacity>
@@ -68,7 +72,7 @@ function RegisterPage(props) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -78,8 +82,8 @@ const styles = StyleSheet.create({
   background: {
     width: 602,
     height: 1194,
-    marginTop: -205,
-    marginLeft: 0,
+    marginTop: -225,
+    marginLeft: -110,
   },
   rect: {
     top: 219,
@@ -99,7 +103,7 @@ const styles = StyleSheet.create({
   },
   image_imageStyle: {},
   rEGISTER2: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "rgba(255,255,255,1)",
     fontSize: 35,
     marginTop: 372,
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     marginLeft: 159,
   },
   password: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "#121212",
     height: 46,
     fontSize: 23,
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
   },
   confirmPassword: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "#121212",
     height: 60,
     fontSize: 23,
@@ -140,7 +144,7 @@ const styles = StyleSheet.create({
     marginTop: 80,
   },
   emailAddress: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-700",
     color: "#121212",
     height: 60,
     fontSize: 23,
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   nEXT: {
-    fontFamily: "roboto-regular",
+    // fontFamily: "roboto-700",
     color: "rgba(241,222,222,1)",
     fontSize: 25,
     height: 41,
