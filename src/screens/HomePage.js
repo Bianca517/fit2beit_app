@@ -9,7 +9,7 @@ const HomePage = ({navigation}) => {
   return (
     <View style={styles.container}>
         <ImageBackground
-          source={require("../assets/images/homepage_background.jpg")}
+          source={require("../assets/images/homepage_background.jpeg")}
           resizeMode="contain"
           style={styles.image}
           imageStyle={styles.image_imageStyle}
