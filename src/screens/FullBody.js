@@ -6,7 +6,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 const FullBody = () => {
    return (
        <Card style = {{padding: 17, margin:8, backgroundColor: "#e7e6bb", borderRadius:20,  }}>
-       <Card.Content>
+       <Card.Content style = {{marginTop:-20}}>
            <Title>Video 1</Title>
            <View>
                 <YoutubePlayer
@@ -16,7 +16,7 @@ const FullBody = () => {
                 />
             </View>
        </Card.Content>
-       <Card.Content>
+       <Card.Content style = {{marginTop:10}}>
            <Title>Video 2</Title>
            <View>
                 <YoutubePlayer
@@ -26,7 +26,7 @@ const FullBody = () => {
                 />
             </View>
        </Card.Content>
-        <Card.Content>
+        <Card.Content style = {{marginTop:20}}>
             <Title>Video 3</Title>
             <View>
                 <YoutubePlayer
