@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -8,14 +8,53 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Button
+  Button,
 } from "react-native";
+import SQLite from "react-native-sqlite-storage";
 
 import HomePage from "./HomePage";
 import RegisterPage from "./RegisterPage";
+import { Alert } from "react-native-web";
 
+/*
+const dataBase = SQLite.openDatabase(
+  {
+    name: "MainDB",
+    location: "default",
+  },
+  () => {},
+  error => {
+    console.log(error);
+  }
+);*/
 
-const LoginPage = ({navigation}) => {
+const LoginPage = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  /*
+  const getData = () => {
+    try {
+      db.transaction(tx => {
+        tx.executeSql(
+          "SELECT Email, Password FROM Clients WHERE Email = 'email'",
+          [],
+          (tx, results) => {
+            var len = results.rows.length;
+            if (len > 0) {
+              var userPassword = results.rows.item(0).Password;
+              if (password === userPassword)
+                navigation.navigate("CreateProfilePage");
+              else Alert.alert("Warning!", "Incorrect password!");
+            }
+          }
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };*/
+
   return (
     <View style={styles.container}>
       <View style={styles.background}>
@@ -31,11 +70,11 @@ const LoginPage = ({navigation}) => {
                 <View style={styles.newMemberStack}>
                   <Text style={styles.newMember}>New Member ?</Text>
                   <View style={styles.signUp}>
-                  <Button 
-                  title = "Sign In"
-                  color = "rgba(255,0,70,1)"
-                  onPress={() => navigation.navigate('Register')}
-                  />
+                    <Button
+                      title="Sign In"
+                      color="rgba(255,0,70,1)"
+                      onPress={() => navigation.navigate("Register")}
+                    />
                   </View>
                 </View>
               </View>
@@ -54,24 +93,28 @@ const LoginPage = ({navigation}) => {
               textBreakStrategy="simple"
               dataDetector="address"
               placeholderTextColor="rgba(255,255,255,1)"
+              color="rgba(255,255,255,1)"
               clearTextOnFocus={true}
               secureTextEntry={true}
               selectionColor="rgba(230, 230, 230,1)"
+              onChangeText={value => setPassword(value)}
               style={styles.emailAddress}
             ></TextInput>
             <TextInput
               placeholder="Email Address"
+              color="rgba(255,255,255,1)"
               textBreakStrategy="simple"
               dataDetector="address"
               placeholderTextColor="rgba(255,255,255,1)"
               clearTextOnFocus={true}
               selectionColor="rgba(230, 230, 230,1)"
+              onChangeText={value => setEmail(value)}
               style={styles.password}
             ></TextInput>
           </View>
           <TouchableOpacity style={styles.loginButton}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => navigation.navigate("Home")}
               style={styles.buttonRectangle}
             >
               <Text style={styles.loginText}>Login</Text>
@@ -81,7 +124,7 @@ const LoginPage = ({navigation}) => {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -179,7 +222,7 @@ const styles = StyleSheet.create({
     top: 70,
     left: 157,
     position: "absolute",
-   // fontFamily: "roboto-700",
+    // fontFamily: "roboto-700",
     color: "rgba(20,255,0,1)",
     height: 45,
     width: 110,

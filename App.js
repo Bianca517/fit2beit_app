@@ -8,22 +8,23 @@ import HomePage from "./src/screens/HomePage.js";
 import WorkoutsPage from "./src/screens/WorkoutsPage.js";
 import RegisterPage from "./src/screens/RegisterPage.js";
 import CreateProfilePage from "./src/screens/CreateProfilePage.js";
+
 import FullBody from "./src/screens/FullBody.js";
 import LowerBody from "./src/screens/LowerBody.js";
 import UpperBody from "./src/screens/UpperBody.js";
 import { NavigationContainer } from '@react-navigation/native';
 
-const Stack = createNativeStackNavigator ();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     //view 1 pagina
-      /*<View style={styles.container}>
+    /*<View style={styles.container}>
         <LoginPage></ LoginPage>
         <StatusBar style="auto" />
       </View>*/
 
-      //view login + home + register + create profile + workouts
+    //view login + home + register + create profile + workouts
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Log In">
           <Stack.Screen name ="Log In" component={LoginPage}/>
@@ -36,8 +37,8 @@ const App = () => {
           <Stack.Screen name ="Upper Body Workouts" component={UpperBody}/>
         </Stack.Navigator>
     </NavigationContainer>
-    );
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
