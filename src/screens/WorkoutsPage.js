@@ -7,7 +7,7 @@ const WorkoutsPage = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.group}>
         <ImageBackground
-          source={require("../assets/images/workouts_background.jpeg")}
+          source={require("../assets/images/workouts_background.jpg")}
           resizeMode="contain"
           style={styles.image}
           imageStyle={styles.image_imageStyle}

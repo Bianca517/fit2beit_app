@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
 import {
   StyleSheet,
@@ -11,10 +11,26 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const CreateProfilePage = ({navigation}) => {
+import { Alert } from "react-native-web";
+import { getActiveChildNavigationOptions } from "react-navigation";
+
+const CreateProfilePage = ({ route, navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
   const [selectedGoal, setSelectedGoal] = useState();
+  const [firstName, setFirstName] = useState();
+  const [secondName, setSecondName] = useState();
+  const [age, setAge] = useState();
+  const [gender, setGender] = useState();
+  const [weight, setWeight] = useState();
+  const [height, setHeight] = useState();
+
+  const { email, password } = route.params;
+
+  function fSetGender(isEnabled) {
+    if (isEnabled === true) setGender("F");
+  }
 
   return (
     <View style={styles.container}>
@@ -37,6 +53,7 @@ const CreateProfilePage = ({navigation}) => {
                 dataDetector="address"
                 placeholderTextColor="rgba(255,255,255,1)"
                 clearTextOnFocus={true}
+                onChangeText={value => setFirstName(value)}
                 //multiline={true}
                 selectionColor="rgba(255,255,255,1)"
                 style={styles.firstName}
@@ -48,6 +65,7 @@ const CreateProfilePage = ({navigation}) => {
                 placeholderTextColor="rgba(255,255,255,1)"
                 clearTextOnFocus={true}
                 selectionColor="rgba(230, 230, 230,1)"
+                onChangeText={value => setSecondName(value)}
                 //multiline={true}
                 style={styles.secondName}
               ></TextInput>
@@ -59,6 +77,7 @@ const CreateProfilePage = ({navigation}) => {
                   placeholderTextColor="rgba(255,255,255,1)"
                   clearTextOnFocus={true}
                   selectionColor="rgba(230, 230, 230,1)"
+                  onChangeText={value => setAge(value)}
                   //multiline={true}
                   style={styles.age}
                 ></TextInput>
@@ -72,7 +91,9 @@ const CreateProfilePage = ({navigation}) => {
                     }}
                     //disabled={false}
                     thumbColor="rgba(230, 230, 230,1)"
-                    onValueChange={toggleSwitch}
+                    onValueChange={value => {
+                      fSetGender(value), toggleSwitch;
+                    }}
                     value={isEnabled}
                     style={styles.switch}
                   ></Switch>
@@ -87,6 +108,7 @@ const CreateProfilePage = ({navigation}) => {
                 clearTextOnFocus={true}
                 selectionColor="rgba(230, 230, 230,1)"
                 //multiline={true}
+                onChangeText={value => setWeight(value)}
                 style={styles.secondName2}
               ></TextInput>
               <TextInput
@@ -97,6 +119,7 @@ const CreateProfilePage = ({navigation}) => {
                 clearTextOnFocus={true}
                 selectionColor="rgba(230, 230, 230,1)"
                 //multiline={true}
+                onChangeText={value => setHeight(value)}
                 style={styles.secondName1}
               ></TextInput>
               <Text style={styles.selectYourGoal}>Select Your Goal:</Text>
@@ -126,7 +149,9 @@ const CreateProfilePage = ({navigation}) => {
             </View>
             <TouchableOpacity style={styles.loginButton1}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('Log In')}
+                onPress={() => {
+                  setData, navigation.navigate("Log In");
+                }}
                 style={styles.buttonRectangle1}
               >
                 <Text style={styles.submit}>S U B M I T</Text>
@@ -137,7 +162,7 @@ const CreateProfilePage = ({navigation}) => {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -169,18 +194,18 @@ const styles = StyleSheet.create({
   buttonRectangle1: {
     backgroundColor: "#10100f",
     borderRadius: 50,
-    flex:1 ,
+    flex: 1,
   },
 
   submit: {
     //fontFamily: "roboto-700",
-     color: "rgba(255,255,255,1)",
-     fontSize: 25,
-     height: 41,
-     width: 120,
-     marginTop: 10,
-     marginLeft: 90,
-   },
+    color: "rgba(255,255,255,1)",
+    fontSize: 25,
+    height: 41,
+    width: 120,
+    marginTop: 10,
+    marginLeft: 90,
+  },
 
   image1: {
     top: 0,
@@ -204,7 +229,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginLeft: 164,
   },
-  
+
   firstName: {
     //fontFamily: "Roboto",
     color: "#121212",

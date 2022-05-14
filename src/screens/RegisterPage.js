@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import { create } from "lodash";
+import React, { Component, useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -7,11 +8,52 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
+import { getActiveChildNavigationOptions } from "react-navigation";
+import { Logs } from "expo";
+
+Logs.enableExpoCliLogging();
+
 import CreateProfilePage from "./CreateProfilePage";
+import { auth } from "../../firebase";
 
 const RegisterPage = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
+
+  function handleSignUp() {
+    auth
+      .createUserWithEmailAndPassword(email.trim(), password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.warn("pe then");
+      })
+      .catch(error => alert(error.message));
+  }
+
+  function forNextButton(email, password, confirmedPassword) {
+    if (
+      email.length == 0 ||
+      password.length == 0 ||
+      confirmedPassword.length == 0
+    ) {
+      Alert.alert("Warning!", "Please write your data.");
+    } else if (password !== confirmedPassword) {
+      Alert.alert("Warning!", "Passwords do not match.");
+    } else {
+      email = email.trim();
+      console.warn(email + " " + password);
+      handleSignUp();
+      navigation.navigate("Create Profile", {
+        email: email,
+        password: password,
+      });
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.background}>
@@ -34,6 +76,10 @@ const RegisterPage = ({ navigation }) => {
                   clearTextOnFocus={true}
                   secureTextEntry={true}
                   selectionColor="rgba(230, 230, 230,1)"
+                  value={password}
+                  onChangeText={value => {
+                    setPassword(value);
+                  }}
                   style={styles.password}
                 ></TextInput>
                 <TextInput
@@ -44,6 +90,10 @@ const RegisterPage = ({ navigation }) => {
                   clearTextOnFocus={true}
                   secureTextEntry={true}
                   selectionColor="rgba(230, 230, 230,1)"
+                  value={confirmedPassword}
+                  onChangeText={value => {
+                    setConfirmedPassword(value);
+                  }}
                   style={styles.confirmPassword}
                 ></TextInput>
               </View>
@@ -54,12 +104,19 @@ const RegisterPage = ({ navigation }) => {
                 placeholderTextColor="rgba(255,255,255,1)"
                 clearTextOnFocus={true}
                 selectionColor="rgba(230, 230, 230,1)"
+                value={email}
+                onChangeText={value => {
+                  setEmail(value);
+                }}
                 style={styles.emailAddress}
               ></TextInput>
             </View>
             <TouchableOpacity style={styles.loginButton1}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Create Profile")}
+                onPress={() => {
+                  console.log(email, password);
+                  forNextButton(email, password, confirmedPassword);
+                }}
                 style={styles.buttonRectangle1}
                 title="S U B M I T"
                 color="white"
