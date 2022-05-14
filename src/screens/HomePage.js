@@ -16,6 +16,7 @@ import WorkoutsPage from "./WorkoutsPage";
 const HomePage = ({ navigation }) => {
   return (
     <View style={styles.container}>
+
       <ImageBackground
         source={require("../assets/images/homepage_background.jpg")}
         resizeMode="contain"
@@ -23,6 +24,7 @@ const HomePage = ({ navigation }) => {
         imageStyle={styles.image_imageStyle}
       >
         <View style={styles.rect}>
+
           <View style={styles.button1}>
             <TouchableOpacity
               onPress={() => navigation.navigate("Workouts")}
