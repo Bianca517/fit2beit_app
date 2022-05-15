@@ -150,7 +150,7 @@ const CreateProfilePage = ({ route, navigation }) => {
             <TouchableOpacity style={styles.loginButton1}>
               <TouchableOpacity
                 onPress={() => {
-                  setData, navigation.navigate("Log In");
+                  navigation.navigate("Log In");
                 }}
                 style={styles.buttonRectangle1}
               >
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
 
   firstName: {
     //fontFamily: "Roboto",
-    color: "#121212",
+    color: "white",
     height: 55,
     fontSize: 23,
     borderWidth: 1,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   },
   secondName: {
     //fontFamily: "Roboto",
-    color: "#121212",
+    color: "white",
     height: 55,
     fontSize: 23,
     borderWidth: 1,
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   },
   age: {
     //fontFamily: "Roboto",
-    color: "#121212",
+    color: "white",
     height: 48,
     width: 122,
     fontSize: 23,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
   },
   secondName2: {
     //fontFamily: "Roboto",
-    color: "#121212",
+    color: "white",
     height: 50,
     width: 243,
     fontSize: 23,
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
   secondName1: {
     //fontFamily: "Roboto",
-    color: "#121212",
+    color: "white",
     height: 50,
     width: 243,
     fontSize: 23,
