@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   password: {
     //fontFamily: "roboto-700",
-    color: "#121212",
+    color: "white",
     height: 46,
     fontSize: 23,
     borderWidth: 1,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   confirmPassword: {
     //fontFamily: "roboto-700",
-    color: "#121212",
+    color: "white",
     height: 60,
     fontSize: 23,
     borderWidth: 1,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   emailAddress: {
     //fontFamily: "roboto-700",
-    color: "#121212",
+    color: "white",
     height: 60,
     fontSize: 23,
     borderWidth: 1,
