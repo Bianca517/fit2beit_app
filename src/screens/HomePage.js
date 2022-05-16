@@ -51,6 +51,16 @@ const HomePage = ({ navigation }) => {
               <Text style={styles.buttonText}>DAILY PLANNER</Text>
             </TouchableOpacity>
           </View>
+
+          <View style={styles.button4}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Quotes")}
+              style={styles.buttonRectangle1}
+            >
+              <Text style={styles.buttonText}>QUOTES</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
       </ImageBackground>
     </View>
@@ -71,8 +81,8 @@ const styles = StyleSheet.create({
     height: 30,
     width: 150,
     marginTop: 0,
-    marginLeft: 10,
-    textAlign: "center",
+    marginLeft: -10,
+    textAlign: 'center',
   },
 
   group: {
@@ -106,28 +116,37 @@ const styles = StyleSheet.create({
   },
 
   button1: {
-    marginTop: 130,
-    marginLeft: 110,
+    marginTop: 180,
+    marginLeft: 10,
     borderRadius: 100,
-    marginRight: 110,
+    marginRight: 240,
     padding: 20,
     backgroundColor: "white",
   },
 
   button2: {
-    marginTop: 50,
-    marginLeft: 110,
+    marginTop: -68,
+    marginLeft: 200,
     borderRadius: 100,
-    marginRight: 110,
+    marginRight: 40,
     padding: 20,
     backgroundColor: "white",
   },
 
   button3: {
-    marginTop: 55,
-    marginLeft: 110,
+    marginTop: 70,
+    marginLeft: 10,
     borderRadius: 100,
-    marginRight: 110,
+    marginRight: 240,
+    padding: 20,
+    backgroundColor: "white",
+  },
+
+  button4: {
+    marginTop: -68,
+    marginLeft: 200,
+    borderRadius: 100,
+    marginRight: 40,
     padding: 20,
     backgroundColor: "white",
   },
