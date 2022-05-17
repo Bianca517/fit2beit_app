@@ -10,50 +10,25 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import SQLite from "react-native-sqlite-storage";
 
 import HomePage from "./HomePage";
 import RegisterPage from "./RegisterPage";
 import { Alert } from "react-native-web";
-
-/*
-const dataBase = SQLite.openDatabase(
-  {
-    name: "MainDB",
-    location: "default",
-  },
-  () => {},
-  error => {
-    console.log(error);
-  }
-);*/
+import { auth } from "../../firebase";
 
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  /*
-  const getData = () => {
-    try {
-      db.transaction(tx => {
-        tx.executeSql(
-          "SELECT Email, Password FROM Clients WHERE Email = 'email'",
-          [],
-          (tx, results) => {
-            var len = results.rows.length;
-            if (len > 0) {
-              var userPassword = results.rows.item(0).Password;
-              if (password === userPassword)
-                navigation.navigate("CreateProfilePage");
-              else Alert.alert("Warning!", "Incorrect password!");
-            }
-          }
-        );
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };*/
+  function handleLogin() {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(cred => {
+        //console.warn(cred.user.email + " " + cred.user.password);
+        navigation.navigate("Home");
+      })
+      .catch(err => alert(err.message));
+  }
 
   return (
     <View style={styles.container}>
@@ -114,8 +89,8 @@ const LoginPage = ({ navigation }) => {
           </View>
           <TouchableOpacity style={styles.loginButton}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Home")}
               style={styles.buttonRectangle}
+              onPress={() => handleLogin()}
             >
               <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>

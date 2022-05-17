@@ -17,4 +17,8 @@ if (firebase.apps.length === 0) {
 }
 
 const auth = firebase.auth();
-export { auth };
+const db = firebase.firestore();
+
+db.settings({ timpestampsInSnapshots: true });
+
+export { auth, db };
