@@ -12,6 +12,7 @@ import CreateProfilePage from "./src/screens/CreateProfilePage.js";
 import FullBody from "./src/screens/FullBody.js";
 import LowerBody from "./src/screens/LowerBody.js";
 import UpperBody from "./src/screens/UpperBody.js";
+import MoodPage from "./src/screens/MoodPage.js";
 import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
@@ -20,7 +21,7 @@ const App = () => {
   return (
     //view 1 pagina
     /*<View style={styles.container}>
-        <LoginPage></ LoginPage>
+        <MoodPage></MoodPage>
         <StatusBar style="auto" />
       </View>*/
 
@@ -35,6 +36,7 @@ const App = () => {
           <Stack.Screen name ="Full Body Workouts" component={FullBody}/>
           <Stack.Screen name ="Lower Body Workouts" component={LowerBody}/>
           <Stack.Screen name ="Upper Body Workouts" component={UpperBody}/>
+          <Stack.Screen name ="Quotes" component={MoodPage}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
