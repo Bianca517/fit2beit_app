@@ -14,6 +14,8 @@ import {
 import { Alert } from "react-native-web";
 import { getActiveChildNavigationOptions } from "react-navigation";
 
+import { auth, db } from "../../firebase";
+
 const CreateProfilePage = ({ route, navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -26,7 +28,23 @@ const CreateProfilePage = ({ route, navigation }) => {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
 
-  const { email, password } = route.params;
+  const { uid, email, password } = route.params;
+
+  function addUserDetails() {
+    return db
+      .collection("Users")
+      .doc(uid)
+      .set({
+        firstName: firstName,
+        secondName: secondName,
+        age: age,
+        gender: gender,
+        weight: weight,
+        height: height,
+      })
+      .then(() => alert("Account created successfully!"))
+      .catch(err => alert(err));
+  }
 
   function fSetGender(isEnabled) {
     if (isEnabled === true) setGender("F");
@@ -150,7 +168,8 @@ const CreateProfilePage = ({ route, navigation }) => {
             <TouchableOpacity style={styles.loginButton1}>
               <TouchableOpacity
                 onPress={() => {
-                  setData, navigation.navigate("Log In");
+                  addUserDetails();
+                  navigation.navigate("Log In");
                 }}
                 style={styles.buttonRectangle1}
               >

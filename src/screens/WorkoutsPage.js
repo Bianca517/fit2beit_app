@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { StyleSheet, View, Image, ImageBackground, Text, TouchableOpacity, Linking } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import ButonDailyPlanner from "../components/ButonDailyPlanner";
 import FullBody from "./FullBody.js";
 
@@ -9,41 +17,39 @@ const WorkoutsPage = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.group}>
         <ImageBackground
-
-          source={require("../assets/images/background_workouts.jpg")};
+          source={require("../assets/images/background_workouts.jpg")}
           resizeMode="contain"
           style={styles.image}
           imageStyle={styles.image_imageStyle}
         >
           <View style={styles.rect}>
             <Text style={styles.chooseYourWorkout}>CHOOSE TODAY'S WORKOUT</Text>
-            
 
             <View style={styles.button1}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Upper Body Workouts')}
-              style={styles.buttonRectangle1}
-            >
-              <Text style={styles.buttonText}>Upper Body</Text>
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Upper Body Workouts")}
+                style={styles.buttonRectangle1}
+              >
+                <Text style={styles.buttonText}>Upper Body</Text>
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.button2}>
-          <TouchableOpacity
-              onPress={() => navigation.navigate('Lower Body Workouts')}
-              style={styles.buttonRectangle1}
-            >
-              <Text style={styles.buttonText}>Lower Body</Text>
-            </TouchableOpacity>
-              </View>
+            <View style={styles.button2}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Lower Body Workouts")}
+                style={styles.buttonRectangle1}
+              >
+                <Text style={styles.buttonText}>Lower Body</Text>
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.button3}>
-          <TouchableOpacity
-              onPress={() => navigation.navigate('Full Body Workouts')}
-              style={styles.buttonRectangle1}
-            >
-              <Text style={styles.buttonText}>Full Body</Text>
-            </TouchableOpacity>
+            <View style={styles.button3}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Full Body Workouts")}
+                style={styles.buttonRectangle1}
+              >
+                <Text style={styles.buttonText}>Full Body</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
@@ -84,14 +90,14 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     textAlign: "center",
   },
-  
+
   group2: {
     width: 215,
     height: 126,
     marginTop: 80,
     marginLeft: 80,
     textAlign: "center",
-    fontSize: 40
+    fontSize: 40,
   },
   image: {
     width: 530,
@@ -124,7 +130,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     textAlign: "center",
   },
-  
+
   butonDailyPlanner: {
     height: 100,
     width: 215,
@@ -141,7 +147,7 @@ const styles = StyleSheet.create({
     marginTop: 41,
     marginLeft: 10,
   },
-  
+
   buttonText: {
     // fontFamily: "roboto-700",
     color: "white",
@@ -209,7 +215,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#e7e6bb",
   },
-
 });
 
 export default WorkoutsPage;

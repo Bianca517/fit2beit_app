@@ -17,7 +17,7 @@ import { Logs } from "expo";
 Logs.enableExpoCliLogging();
 
 import CreateProfilePage from "./CreateProfilePage";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 
 const RegisterPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -30,6 +30,11 @@ const RegisterPage = ({ navigation }) => {
       .then(userCredentials => {
         const user = userCredentials.user;
         console.warn("pe then");
+        navigation.navigate("Create Profile", {
+          uid: userCredentials.user.uid,
+          email: email,
+          password: password,
+        });
       })
       .catch(error => alert(error.message));
   }
@@ -47,10 +52,6 @@ const RegisterPage = ({ navigation }) => {
       email = email.trim();
       console.warn(email + " " + password);
       handleSignUp();
-      navigation.navigate("Create Profile", {
-        email: email,
-        password: password,
-      });
     }
   }
 
@@ -114,7 +115,6 @@ const RegisterPage = ({ navigation }) => {
             <TouchableOpacity style={styles.loginButton1}>
               <TouchableOpacity
                 onPress={() => {
-                  console.log(email, password);
                   forNextButton(email, password, confirmedPassword);
                 }}
                 style={styles.buttonRectangle1}
