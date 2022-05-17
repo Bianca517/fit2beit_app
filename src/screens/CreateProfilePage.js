@@ -9,6 +9,7 @@ import {
   TextInput,
   Switch,
   TouchableOpacity,
+  ScrollView
 } from "react-native";
 
 import { Alert } from "react-native-web";
@@ -52,6 +53,7 @@ const CreateProfilePage = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ScrollView style={styles.ScrollView}>
       <View style={styles.background1}>
         <View style={styles.rect1Stack}>
           <View style={styles.rect1}></View>
@@ -178,6 +180,7 @@ const CreateProfilePage = ({ route, navigation }) => {
           </ImageBackground>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -196,7 +199,7 @@ const styles = StyleSheet.create({
     top: 219,
     left: 105,
     width: 394,
-    height: 812,
+    height: 680,
     position: "absolute",
     backgroundColor: "rgba(53,46,46,1)",
     opacity: 0.43,
@@ -226,10 +229,10 @@ const styles = StyleSheet.create({
   },
 
   image1: {
-    top: 0,
+    top: -600,
     left: 0,
     width: 602,
-    height: 1194,
+    height: 2094,
     position: "absolute",
   },
   image1_imageStyle: {},
@@ -238,7 +241,7 @@ const styles = StyleSheet.create({
     color: "rgba(255,255,255,1)",
     fontSize: 33,
     textAlign: "center",
-    marginTop: 240,
+    marginTop: 630,
     marginLeft: 0,
   },
   data: {
@@ -372,6 +375,9 @@ const styles = StyleSheet.create({
     marginTop: -80,
     //fontFamily: "Roboto",
   },
+  ScrollView: {
+    backgroundColor: "black"
+  }
 });
 
 export default CreateProfilePage;

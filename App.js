@@ -21,7 +21,7 @@ const App = () => {
   return (
     //view 1 pagina
     /*<View style={styles.container}>
-        <MoodPage></MoodPage>
+        <CreateProfilePage></CreateProfilePage>
         <StatusBar style="auto" />
       </View>*/
 
