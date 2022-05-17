@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  ScrollView
 } from "react-native";
 
 import { getActiveChildNavigationOptions } from "react-navigation";
@@ -57,6 +58,7 @@ const RegisterPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ScrollView style={styles.ScrollView}>
       <View style={styles.background}>
         <View style={styles.rectStack}>
           <View style={styles.rect}></View>
@@ -127,6 +129,7 @@ const RegisterPage = ({ navigation }) => {
           </ImageBackground>
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -152,10 +155,10 @@ const styles = StyleSheet.create({
     opacity: 0.43,
   },
   image: {
-    top: 0,
+    top: -80,
     left: 0,
     width: 602,
-    height: 1194,
+    height: 1494,
     position: "absolute",
   },
   image_imageStyle: {},
@@ -238,6 +241,11 @@ const styles = StyleSheet.create({
     width: 602,
     height: 1194,
   },
+
+  ScrollView: {
+    backgroundColor: "black"
+  }
+
 });
 
 export default RegisterPage;
