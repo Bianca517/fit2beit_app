@@ -45,7 +45,7 @@ const HomePage = ({ navigation }) => {
 
           <View style={styles.button3}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Workouts")}
+              onPress={() => navigation.navigate("To Do")}
               style={styles.buttonRectangle1}
             >
               <Text style={styles.buttonText}>DAILY PLANNER</Text>
