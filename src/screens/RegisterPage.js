@@ -9,9 +9,11 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  ScrollView
+  Keyboard,
 } from "react-native";
 
+import { TouchableWithoutFeedback } from "react-native-web";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { getActiveChildNavigationOptions } from "react-navigation";
 import { Logs } from "expo";
 
@@ -30,7 +32,6 @@ const RegisterPage = ({ navigation }) => {
       .createUserWithEmailAndPassword(email.trim(), password)
       .then(userCredentials => {
         const user = userCredentials.user;
-        console.warn("pe then");
         navigation.navigate("Create Profile", {
           uid: userCredentials.user.uid,
           email: email,
@@ -51,86 +52,94 @@ const RegisterPage = ({ navigation }) => {
       Alert.alert("Warning!", "Passwords do not match.");
     } else {
       email = email.trim();
-      console.warn(email + " " + password);
+      //console.warn(email + " " + password);
       handleSignUp();
     }
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.ScrollView}>
-      <View style={styles.background}>
-        <View style={styles.rectStack}>
-          <View style={styles.rect}></View>
-          <ImageBackground
-            source={require("../assets/images/RegisterBkd.jpg")}
-            resizeMode="contain"
-            style={styles.image}
-            imageStyle={styles.image_imageStyle}
-          >
-            <Text style={styles.rEGISTER2}>R E G I S T E R</Text>
-            <View style={styles.textInputs}>
-              <View style={styles.passwordColumn}>
+    <KeyboardAwareScrollView
+      behavior="padding"
+      style={styles.keyboardAwareScrollView}
+    >
+      <TouchableWithoutFeedback
+        onPress={Keyboard.dismiss}
+        style={styles.container}
+      >
+        <View style={styles.background}>
+          <View style={styles.rectStack}>
+            <View style={styles.rect}></View>
+            <ImageBackground
+              source={require("../assets/images/RegisterBkd.jpg")}
+              resizeMode="contain"
+              style={styles.image}
+              imageStyle={styles.image_imageStyle}
+            >
+              <Text style={styles.rEGISTER2}>R E G I S T E R</Text>
+              <View style={styles.textInputs}>
+                <View style={styles.passwordColumn}>
+                  <TextInput
+                    placeholder="Password"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    secureTextEntry={true}
+                    selectionColor="rgba(230, 230, 230,1)"
+                    value={password}
+                    onChangeText={value => {
+                      setPassword(value);
+                    }}
+                    style={styles.password}
+                  ></TextInput>
+                  <TextInput
+                    placeholder="Confirm Password"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    secureTextEntry={true}
+                    selectionColor="rgba(230, 230, 230,1)"
+                    value={confirmedPassword}
+                    onChangeText={value => {
+                      setConfirmedPassword(value);
+                    }}
+                    style={styles.confirmPassword}
+                  ></TextInput>
+                </View>
                 <TextInput
-                  placeholder="Password"
+                  placeholder="Email Address"
                   textBreakStrategy="simple"
                   dataDetector="address"
                   placeholderTextColor="rgba(255,255,255,1)"
                   clearTextOnFocus={true}
-                  secureTextEntry={true}
                   selectionColor="rgba(230, 230, 230,1)"
-                  value={password}
+                  //ref="email"
+                  defaultValue={email}
                   onChangeText={value => {
-                    setPassword(value);
+                    console.warn(email);
+                    if (value.trim().length !== 0) setEmail(value);
                   }}
-                  style={styles.password}
-                ></TextInput>
-                <TextInput
-                  placeholder="Confirm Password"
-                  textBreakStrategy="simple"
-                  dataDetector="address"
-                  placeholderTextColor="rgba(255,255,255,1)"
-                  clearTextOnFocus={true}
-                  secureTextEntry={true}
-                  selectionColor="rgba(230, 230, 230,1)"
-                  value={confirmedPassword}
-                  onChangeText={value => {
-                    setConfirmedPassword(value);
-                  }}
-                  style={styles.confirmPassword}
+                  style={styles.emailAddress}
                 ></TextInput>
               </View>
-              <TextInput
-                placeholder="Email Address"
-                textBreakStrategy="simple"
-                dataDetector="address"
-                placeholderTextColor="rgba(255,255,255,1)"
-                clearTextOnFocus={true}
-                selectionColor="rgba(230, 230, 230,1)"
-                value={email}
-                onChangeText={value => {
-                  setEmail(value);
-                }}
-                style={styles.emailAddress}
-              ></TextInput>
-            </View>
-            <TouchableOpacity style={styles.loginButton1}>
-              <TouchableOpacity
-                onPress={() => {
-                  forNextButton(email, password, confirmedPassword);
-                }}
-                style={styles.buttonRectangle1}
-                title="S U B M I T"
-                color="white"
-              >
-                <Text style={styles.nEXT}>N E X T</Text>
+              <TouchableOpacity style={styles.loginButton1}>
+                <TouchableOpacity
+                  onPress={() => {
+                    forNextButton(email, password, confirmedPassword);
+                  }}
+                  style={styles.buttonRectangle1}
+                  title="S U B M I T"
+                  color="white"
+                >
+                  <Text style={styles.nEXT}>N E X T</Text>
+                </TouchableOpacity>
               </TouchableOpacity>
-            </TouchableOpacity>
-          </ImageBackground>
+            </ImageBackground>
+          </View>
         </View>
-      </View>
-      </ScrollView>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
   },
   background: {
     width: 602,
-    height: 1194,
+    height: 800,
     marginTop: -225,
     marginLeft: -110,
   },
@@ -174,6 +183,7 @@ const styles = StyleSheet.create({
     height: 46,
     marginTop: 109,
     marginLeft: 159,
+    editable: true,
   },
   password: {
     //fontFamily: "roboto-700",
@@ -241,11 +251,9 @@ const styles = StyleSheet.create({
     width: 602,
     height: 1194,
   },
-
-  ScrollView: {
-    backgroundColor: "black"
-  }
-
+  keyboardAvoidingView: {
+    backgroundColor: "black",
+  },
 });
 
 export default RegisterPage;

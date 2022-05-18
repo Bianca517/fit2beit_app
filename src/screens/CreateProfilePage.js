@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, Dimensions } from "react";
 import { Picker } from "@react-native-picker/picker";
 import {
   StyleSheet,
@@ -9,18 +9,20 @@ import {
   TextInput,
   Switch,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  KeyboardAvoidingView,
+  Touchable,
+  Keyboard,
 } from "react-native";
 
-import { Alert } from "react-native-web";
+import { Alert, TouchableWithoutFeedback } from "react-native-web";
 import { getActiveChildNavigationOptions } from "react-navigation";
 
 import { auth, db } from "../../firebase";
+import { ScreenStackHeaderRightView } from "react-native-screens";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CreateProfilePage = ({ route, navigation }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
   const [selectedGoal, setSelectedGoal] = useState();
   const [firstName, setFirstName] = useState();
   const [secondName, setSecondName] = useState();
@@ -47,141 +49,142 @@ const CreateProfilePage = ({ route, navigation }) => {
       .catch(err => alert(err));
   }
 
-  function fSetGender(isEnabled) {
-    if (isEnabled === true) setGender("F");
-  }
-
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.ScrollView}>
-      <View style={styles.background1}>
-        <View style={styles.rect1Stack}>
-          <View style={styles.rect1}></View>
-          <ImageBackground
-            source={require("../assets/images/RegisterBkd.jpg")}
-            resizeMode="contain"
-            style={styles.image1}
-            imageStyle={styles.image1_imageStyle}
-          >
-            <Text style={styles.createYourProfile}>
-              CREATE YOUR{"\n"}PROFILE
-            </Text>
-            <View style={styles.data}>
-              <TextInput
-                placeholder="First Name"
-                textBreakStrategy="simple"
-                dataDetector="address"
-                placeholderTextColor="rgba(255,255,255,1)"
-                clearTextOnFocus={true}
-                onChangeText={value => setFirstName(value)}
-                //multiline={true}
-                selectionColor="rgba(255,255,255,1)"
-                style={styles.firstName}
-              ></TextInput>
-              <TextInput
-                placeholder="Second Name"
-                textBreakStrategy="simple"
-                dataDetector="address"
-                placeholderTextColor="rgba(255,255,255,1)"
-                clearTextOnFocus={true}
-                selectionColor="rgba(230, 230, 230,1)"
-                onChangeText={value => setSecondName(value)}
-                //multiline={true}
-                style={styles.secondName}
-              ></TextInput>
-              <View style={styles.ageRow}>
-                <TextInput
-                  placeholder="Age"
-                  textBreakStrategy="simple"
-                  dataDetector="address"
-                  placeholderTextColor="rgba(255,255,255,1)"
-                  clearTextOnFocus={true}
-                  selectionColor="rgba(230, 230, 230,1)"
-                  onChangeText={value => setAge(value)}
-                  //multiline={true}
-                  style={styles.age}
-                ></TextInput>
-                <View style={styles.masculinStack}>
-                  <Text style={styles.masculin}>M</Text>
-                  <Switch
-                    //value={true}
-                    trackColor={{
-                      true: "rgba(131,255,56,1)",
-                      false: "#0f0f0f",
+    <KeyboardAwareScrollView behavior="padding">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView
+          style={styles.ScrollView}
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
+          <View style={styles.background1}>
+            <View style={styles.rect1Stack}>
+              <ImageBackground
+                source={require("../assets/images/RegisterBkd.jpg")}
+                resizeMode="contain"
+                style={styles.image1}
+                imageStyle={styles.image1_imageStyle}
+              >
+                <Text style={styles.createYourProfile}>
+                  CREATE YOUR{"\n"}PROFILE
+                </Text>
+                <View style={styles.data}>
+                  <TextInput
+                    placeholder="First Name"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    value={firstName}
+                    onChangeText={value => {
+                      if (value.length != 0) setFirstName(value);
+                      console.warn(firstName);
                     }}
-                    //disabled={false}
-                    thumbColor="rgba(230, 230, 230,1)"
-                    onValueChange={value => {
-                      fSetGender(value), toggleSwitch;
-                    }}
-                    value={isEnabled}
-                    style={styles.switch}
-                  ></Switch>
+                    selectionColor="rgba(255,255,255,1)"
+                    style={styles.firstName}
+                  ></TextInput>
+                  <TextInput
+                    placeholder="Second Name"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    selectionColor="rgba(230, 230, 230,1)"
+                    onChangeText={value => setSecondName(value)}
+                    style={styles.secondName}
+                  ></TextInput>
+                  <TextInput
+                    placeholder="Age"
+                    keyboardType="numeric"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    selectionColor="rgba(230, 230, 230,1)"
+                    onChangeText={value => setAge(value)}
+                    style={styles.age}
+                  ></TextInput>
+                  <Text style={styles.selectYourGender}>Gender:</Text>
+                  <Picker
+                    selectedValue={gender}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setGender(itemValue)
+                    }
+                    style={styles.genderPicker}
+                  >
+                    <Picker.Item
+                      color="rgba(255,255,255,1)"
+                      label="Masculin"
+                      value="M"
+                    />
+                    <Picker.Item
+                      color="rgba(255,255,255,1)"
+                      label="Feminin"
+                      value="F"
+                    />
+                  </Picker>
+                  <TextInput
+                    placeholder="Weight (kg)"
+                    keyboardType="numeric"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    selectionColor="rgba(230, 230, 230,1)"
+                    onChangeText={value => setWeight(value)}
+                    style={styles.weightTextInput}
+                  ></TextInput>
+                  <TextInput
+                    placeholder="Height (cm)"
+                    keyboardType="numeric"
+                    textBreakStrategy="simple"
+                    dataDetector="address"
+                    placeholderTextColor="rgba(255,255,255,1)"
+                    clearTextOnFocus={true}
+                    selectionColor="rgba(230, 230, 230,1)"
+                    onChangeText={value => setHeight(value)}
+                    style={styles.heightTextInput}
+                  ></TextInput>
+                  <Text style={styles.selectYourGoal}>Select Your Goal:</Text>
+                  <Picker
+                    selectedValue={selectedGoal}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedGoal(itemValue)
+                    }
+                    style={styles.goalPicker}
+                  >
+                    <Picker.Item
+                      color="rgba(255,255,255,1)"
+                      label="Lose Weight"
+                      value="lose_weight"
+                    />
+                    <Picker.Item
+                      color="rgba(255,255,255,1)"
+                      label="Gain Muscle"
+                      value="gain_muscle"
+                    />
+                    <Picker.Item
+                      color="rgba(255,255,255,1)"
+                      label="Maintainance"
+                      value="maintainance"
+                    />
+                  </Picker>
                 </View>
-                <Text style={styles.feminin}>F</Text>
-              </View>
-              <TextInput
-                placeholder="Weight (kg)"
-                textBreakStrategy="simple"
-                dataDetector="address"
-                placeholderTextColor="rgba(255,255,255,1)"
-                clearTextOnFocus={true}
-                selectionColor="rgba(230, 230, 230,1)"
-                //multiline={true}
-                onChangeText={value => setWeight(value)}
-                style={styles.secondName2}
-              ></TextInput>
-              <TextInput
-                placeholder="Height (cm)"
-                textBreakStrategy="simple"
-                dataDetector="address"
-                placeholderTextColor="rgba(255,255,255,1)"
-                clearTextOnFocus={true}
-                selectionColor="rgba(230, 230, 230,1)"
-                //multiline={true}
-                onChangeText={value => setHeight(value)}
-                style={styles.secondName1}
-              ></TextInput>
-              <Text style={styles.selectYourGoal}>Select Your Goal:</Text>
-              <Picker
-                selectedValue={selectedGoal}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedGoal(itemValue)
-                }
-                style={styles.picker}
-              >
-                <Picker.Item
-                  color="rgba(255,255,255,1)"
-                  label="Lose Weight"
-                  value="java"
-                />
-                <Picker.Item
-                  color="rgba(255,255,255,1)"
-                  label="Gain Muscle"
-                  value="js"
-                />
-                <Picker.Item
-                  color="rgba(255,255,255,1)"
-                  label="Maintainance"
-                  value="rn"
-                />
-              </Picker>
+                <TouchableOpacity style={styles.loginButton1}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      addUserDetails();
+                    }}
+                    style={styles.buttonRectangle1}
+                  >
+                    <Text style={styles.submit}>S U B M I T</Text>
+                  </TouchableOpacity>
+                </TouchableOpacity>
+              </ImageBackground>
             </View>
-            <TouchableOpacity style={styles.loginButton1}>
-              <TouchableOpacity
-                onPress={() => {
-                  addUserDetails();
-                }}
-                style={styles.buttonRectangle1}
-              >
-                <Text style={styles.submit}>S U B M I T</Text>
-              </TouchableOpacity>
-            </TouchableOpacity>
-          </ImageBackground>
-        </View>
-      </View>
-      </ScrollView>
-    </View>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
   },
   background1: {
     width: 602,
-    height: 1194,
+    height: 900,
     alignSelf: "center",
   },
   rect1: {
@@ -204,20 +207,17 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(53,46,46,1)",
     opacity: 0.43,
   },
-
   loginButton1: {
     width: 283,
     height: 49,
-    marginTop: 510,
+    marginTop: 630,
     marginLeft: 155,
   },
-
   buttonRectangle1: {
     backgroundColor: "#10100f",
     borderRadius: 50,
     flex: 1,
   },
-
   submit: {
     //fontFamily: "roboto-700",
     color: "rgba(255,255,255,1)",
@@ -227,7 +227,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 90,
   },
-
   image1: {
     top: -600,
     left: 0,
@@ -235,7 +234,6 @@ const styles = StyleSheet.create({
     height: 2094,
     position: "absolute",
   },
-  image1_imageStyle: {},
   createYourProfile: {
     //fontFamily: "Roboto",
     color: "rgba(255,255,255,1)",
@@ -250,7 +248,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginLeft: 164,
   },
-
   firstName: {
     //fontFamily: "Roboto",
     color: "white",
@@ -275,7 +272,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
-    marginTop: 28,
+    marginTop: 15,
   },
   age: {
     //fontFamily: "Roboto",
@@ -289,46 +286,21 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
+    marginTop: 15,
   },
-  masculin: {
-    top: 0,
-    left: 0,
-    position: "absolute",
+  selectYourGender: {
     //fontFamily: "Roboto",
     color: "rgba(255,255,255,1)",
-    height: 50,
-    width: 40,
-    fontSize: 30,
+    height: 30,
+    width: 243,
+    fontSize: 23,
+    marginTop: 20,
+    marginBottom: 0,
   },
-  switch: {
-    position: "absolute",
-    top: 8,
-    left: 35,
-    width: 45,
-    height: 23,
+  genderPicker: {
+    marginTop: -80,
   },
-  masculinStack: {
-    width: 80,
-    height: 50,
-    marginLeft: 18,
-    marginTop: 10,
-  },
-  feminin: {
-    //fontFamily: "Roboto",
-    color: "rgba(255,255,255,1)",
-    height: 50,
-    width: 40,
-    fontSize: 30,
-    marginLeft: 12,
-    marginTop: 10,
-  },
-  ageRow: {
-    height: 60,
-    flexDirection: "row",
-    marginTop: 32,
-    marginRight: -29,
-  },
-  secondName2: {
+  weightTextInput: {
     //fontFamily: "Roboto",
     color: "white",
     height: 50,
@@ -340,10 +312,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
-    marginTop: 15,
+    marginTop: -40,
     marginLeft: 0,
   },
-  secondName1: {
+  heightTextInput: {
     //fontFamily: "Roboto",
     color: "white",
     height: 50,
@@ -355,12 +327,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
-    marginTop: 15,
+    marginTop: 20,
     marginLeft: 0,
   },
   rect1Stack: {
     width: 602,
-    height: 1194,
+    //height: 1194,
   },
   selectYourGoal: {
     //fontFamily: "Roboto",
@@ -371,13 +343,15 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 0,
   },
-  picker: {
-    marginTop: -80,
+  goalPicker: {
+    marginTop: -70,
     //fontFamily: "Roboto",
   },
   ScrollView: {
-    backgroundColor: "black"
-  }
+    height: "1%",
+    backgroundColor: "black",
+    automaticallyAdjustsScrollIndicatorInsets: true,
+  },
 });
 
 export default CreateProfilePage;
