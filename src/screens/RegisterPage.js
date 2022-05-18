@@ -183,7 +183,6 @@ const styles = StyleSheet.create({
     height: 46,
     marginTop: 109,
     marginLeft: 159,
-    editable: true,
   },
   password: {
     //fontFamily: "roboto-700",
