@@ -16,7 +16,6 @@ import WorkoutsPage from "./WorkoutsPage";
 const HomePage = ({ navigation }) => {
   return (
     <View style={styles.container}>
-
       <ImageBackground
         source={require("../assets/images/homepage_background.jpg")}
         resizeMode="contain"
@@ -24,7 +23,6 @@ const HomePage = ({ navigation }) => {
         imageStyle={styles.image_imageStyle}
       >
         <View style={styles.rect}>
-
           <View style={styles.button1}>
             <TouchableOpacity
               onPress={() => navigation.navigate("Workouts")}
@@ -36,7 +34,7 @@ const HomePage = ({ navigation }) => {
 
           <View style={styles.button2}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Workouts")}
+              onPress={() => navigation.navigate("Menus")}
               style={styles.buttonRectangle1}
             >
               <Text style={styles.buttonText}>MENUS</Text>
@@ -60,7 +58,6 @@ const HomePage = ({ navigation }) => {
               <Text style={styles.buttonText}>QUOTES</Text>
             </TouchableOpacity>
           </View>
-
         </View>
       </ImageBackground>
     </View>
@@ -82,7 +79,7 @@ const styles = StyleSheet.create({
     width: 150,
     marginTop: 0,
     marginLeft: -10,
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   group: {
