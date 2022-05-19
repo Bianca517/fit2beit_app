@@ -1,3 +1,4 @@
+
 const mealPlans = {
   0: {
     0: ["Omleta", require("../images/menus/mealPlan0/breakfast.jpg")],
