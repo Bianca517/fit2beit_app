@@ -10,13 +10,12 @@ const timeToString = time => {
   return date.toISOString().split("T")[0];
 };
 
-import { mealPlans } from "../assets/mealPlans/mealPlans.js";
-
 const meals = ["Breakfast", "Snack1", "Lunch", "Snack2", "Dinner"];
+
+import mealPlans from "../assets/mealPlans/mealPlans.js";
 
 const Schedule = ({ navigation }) => {
   const [items, setItems] = useState({});
-
   const loadItems = day => {
     setTimeout(() => {
       for (let i = 0; i < 16; i++) {
