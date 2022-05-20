@@ -1,5 +1,5 @@
 const recipes = {
-  Omleta: {
+  "Terci de ovaz": {
     id: 1,
     name: "Spaghetti With Shrimp Sauce",
     image: require("../images/menus/mealPlan0/lunch.jpg"),

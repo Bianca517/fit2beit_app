@@ -56,8 +56,13 @@ const Schedule = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          check_if_recipe_exists(item.name.split(" ").slice(2)) == 1
-            ? navigation.navigate("Recipe", item.name.split(" ").slice(2))
+          check_if_recipe_exists(
+            item.name.split(" ").slice(2).toString().replaceAll(",", " ")
+          ) == 1
+            ? navigation.navigate(
+                "Recipe",
+                item.name.split(" ").slice(2).toString().replaceAll(",", " ")
+              )
             : Alert.alert("Sorry! There is no recipe available for this meal.");
         }}
         style={{ marginRight: 10, marginTop: 17 }}
