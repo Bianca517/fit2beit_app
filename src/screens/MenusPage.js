@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text, Alert } from "react-native";
 import { Agenda } from "react-native-calendars";
 import { Card, Avatar } from "react-native-paper";
 //import Typography from "../components/Typography";
@@ -13,6 +13,13 @@ const timeToString = time => {
 const meals = ["Breakfast", "Snack 1", "Lunch", "Snack 2", "Dinner"];
 
 import mealPlans from "../assets/mealPlans/mealPlans.js";
+import recipes from "../assets/recipes/recipes.js";
+
+function check_if_recipe_exists(recipe_name) {
+  console.warn("aici MP" + recipe_name);
+  if (recipes.hasOwnProperty(recipe_name)) return 1;
+  return 0;
+}
 
 const Schedule = ({ navigation }) => {
   const [items, setItems] = useState({});
@@ -47,7 +54,14 @@ const Schedule = ({ navigation }) => {
 
   const renderItem = item => {
     return (
-      <TouchableOpacity style={{ marginRight: 10, marginTop: 17 }}>
+      <TouchableOpacity
+        onPress={() => {
+          check_if_recipe_exists(item.name.split(" ").slice(2)) == 1
+            ? navigation.navigate("Recipe", item.name.split(" ").slice(2))
+            : Alert.alert("Sorry! There is no recipe available for this meal.");
+        }}
+        style={{ marginRight: 10, marginTop: 17 }}
+      >
         <Card>
           <Card.Content>
             <View
