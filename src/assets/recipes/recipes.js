@@ -1,5 +1,5 @@
 const recipes = {
-  Ciorba: {
+  Omleta: {
     id: 1,
     name: "Spaghetti With Shrimp Sauce",
     image: require("../images/menus/mealPlan0/lunch.jpg"),
@@ -8,37 +8,37 @@ const recipes = {
     ingredients: [
       {
         id: 1,
-        //icon: //s.pasta,
+        icon: require("../images/icons/pasta.png"),
         description: "Spaghetti pasta",
         quantity: "100g",
       },
       {
         id: 2,
-        //: //s.oil,
+        icon: require("../images/icons/oil.png"),
         description: "Olive Oil",
         quantity: "2 tbsp",
       },
       {
         id: 3,
-        //: //s.shrimp,
+        icon: require("../images/icons/shrimp.png"),
         description: "Fresh Shrimp",
         quantity: "100g",
       },
       {
         id: 4,
-        //: //s.tomato,
+        icon: require("../images/icons/tomato.png"),
         description: "Campari tomatoes",
         quantity: "100g",
       },
       {
         id: 5,
-        //: //s.salt,
+        icon: require("../images/icons/salt.png"),
         description: "Salt",
         quantity: "¾ tbsp",
       },
       {
         id: 6,
-        //: //s.pepper,
+        icon: require("../images/icons/pepper.png"),
         description: "Black Pepper",
         quantity: "¼ tbsp",
       },

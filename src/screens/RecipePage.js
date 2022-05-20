@@ -16,22 +16,19 @@ import recipes from "../assets/recipes/recipes.js";
 
 const HEADER_HEIGHT = 350;
 const { WIDTH, HEIGHT } = Dimensions.get("window");
-const scrollY = useRef(new Animated.Value(0)).current;
 
 const RecipePage = ({ navigation, route }) => {
-  const [selectedRecipe, setSelectedRecipe] = useState("");
+  //const [selectedRecipe, setSelectedRecipe] = useState("");
+  const scrollY = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    let { recipe } = recipes[route.params];
-    setSelectedRecipe(recipe);
-  }, []);
+  const selectedRecipe = route.params;
 
   function renderRecipeCardHeader() {
     return (
       <View style={styles.viewHeader}>
         {/* Background Image */}
         <Animated.Image
-          source={selectedRecipe?.image}
+          source={recipes[selectedRecipe]["image"]}
           resizeMode="contain"
           style={{
             height: HEADER_HEIGHT,
@@ -52,20 +49,36 @@ const RecipePage = ({ navigation, route }) => {
             ],
           }}
         />
-        <Animated.View style={styles.viewAnimatedOverlay} />
+        <Animated.View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgb(0,0,0)",
+            opacity: scrollY.interpolate({
+              inputRange: [HEADER_HEIGHT - 100, HEADER_HEIGHT - 70],
+              outputRange: [0, 1],
+            }),
+          }}
+        />
       </View>
     );
   }
 
   function renderRecipeInfo() {
+    const details =
+      recipes[selectedRecipe]["duration"] +
+      " | " +
+      recipes[selectedRecipe]["serving"] +
+      " Servings";
     return (
       <View style={styles.viewHeaderRecipe}>
         {/* Recipe */}
         <View style={styles.recipeHeader}>
-          <Text style={styles.h2}>{selectedRecipe?.name}</Text>
-          <Text style={styles.headerDetails}>
-            {selectedRecipe?.duration} |{selectedRecipe?.serving} Serving
-          </Text>
+          <Text style={styles.h2}>{recipes[selectedRecipe]["name"]}</Text>
+          <Text style={styles.headerDetails}>{details}</Text>
         </View>
       </View>
     );
@@ -74,9 +87,38 @@ const RecipePage = ({ navigation, route }) => {
   function renderIngredientHeader() {
     return (
       <View styles={styles.viewIngredientHeader}>
-        <Text style={{ flex: 1, fontSize: 16 }}> Ingredients </Text>
-        <Text style={{ color: "#D3D3D3", fontSize: 14 }}>
-          {selectedRecipe?.ingredients.length} items
+        <Text style={{ flex: 1, fontSize: 16, marginLeft: 25 }}>
+          {" "}
+          Ingredients{" "}
+        </Text>
+        <Text
+          style={{
+            color: "#D3D3D3",
+            fontSize: 14,
+            textAlign: "right",
+            marginRight: 25,
+          }}
+        >
+          {recipes[selectedRecipe]["ingredients"].length} items
+        </Text>
+      </View>
+    );
+  }
+
+  function renderTextRecipe() {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          paddingHorizontal: 20,
+          justifyContent: "center",
+          width: WIDTH,
+        }}
+      >
+        <Text style={{ fontSize: 16, marginLeft: 5 }}> Steps </Text>
+        <Text style={{ fontSize: 16, marginLeft: 25, textAlign: "left" }}>
+          se face aluat, se lasa la dospit, se pune la cuptor
         </Text>
       </View>
     );
@@ -85,7 +127,7 @@ const RecipePage = ({ navigation, route }) => {
   return (
     <View style={styles.viewContainer}>
       <Animated.FlatList
-        data={selectedRecipe?.ingredients}
+        data={recipes[selectedRecipe]["ingredients"]}
         keyExtractor={item => `&{item.id}`}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
@@ -105,8 +147,26 @@ const RecipePage = ({ navigation, route }) => {
         )}
         renderItem={({ item }) => (
           <View style={styles.viewIngredients}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 50,
+                width: 50,
+                borderRadius: 5,
+                backgroundColor: "#D3D3D3",
+              }}
+            >
+              <Image
+                source={item.icon}
+                style={{
+                  height: 40,
+                  width: 40,
+                }}
+              />
+            </View>
             {/* Description */}
-            <View style={viewDescription}>
+            <View style={styles.viewDescription}>
               <Text>{item.description}</Text>
             </View>
             {/* Quantity */}
@@ -115,7 +175,28 @@ const RecipePage = ({ navigation, route }) => {
             </View>
           </View>
         )}
+        renderSteps={
+          <View
+            style={{
+              flexDirection: 1,
+              paddingHorizontal: 30,
+              marginVertical: 5,
+              backgroundColor: "#FFF25F",
+            }}
+          ></View>
+        }
       />
+      <View
+        style={{
+          width: WIDTH,
+          flex: 1,
+          marginBottom: 50,
+          backgroundColor: "#D3D3D3",
+        }}
+      >
+        {/* DE CE NU APARE??? */}
+        {renderTextRecipe()}
+      </View>
     </View>
   );
 };
@@ -145,45 +226,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
   },
-  viewAnimatedOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgb(0,0,0)",
-    opacity: scrollY.interpolate({
-      inputRange: [HEADER_HEIGHT - 100, HEADER_HEIGHT - 70],
-      outputRange: [0, 1],
-    }),
-    viewHeaderRecipe: {
-      flexDirection: "row",
-      height: 130,
-      width: WIDTH,
-      paddingHorizontal: 30,
-      paddingVertical: 20,
-      alignItems: "center",
-    },
-    recipeHeader: {
-      flex: 1.5,
-      justifyContent: "center",
-    },
-    h2: {
-      fontFamily: "Roboto-Bold",
-      fontSize: 22,
-      lineHeight: 30,
-    },
-    headerDetails: {
-      marginTop: 5,
-      color: "#D3D3D3",
-      fontSize: 14,
-    },
-    viewIngredientHeader: {
-      flexDirection: "row",
-      paddingHorizontal: 30,
-      marginTop: 12,
-      marginBottom: 24,
-    },
+  viewHeaderRecipe: {
+    flexDirection: "row",
+    height: 130,
+    width: WIDTH,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    alignItems: "center",
+  },
+  recipeHeader: {
+    flex: 1.5,
+    justifyContent: "center",
+  },
+  h2: {
+    fontFamily: "Roboto-Bold",
+    fontSize: 22,
+    lineHeight: 30,
+  },
+  headerDetails: {
+    marginTop: 5,
+    color: "#D3D3D3",
+    fontSize: 14,
+  },
+  viewIngredientHeader: {
+    flexDirection: "row",
+    paddingHorizontal: 30,
+    marginTop: 12,
+    marginBottom: 24,
   },
 });
 

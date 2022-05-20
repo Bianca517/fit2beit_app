@@ -16,7 +16,8 @@ import mealPlans from "../assets/mealPlans/mealPlans.js";
 import recipes from "../assets/recipes/recipes.js";
 
 function check_if_recipe_exists(recipe_name) {
-  if (recipes[recipe_name] != NULL) return 1;
+  console.warn("aici MP" + recipe_name);
+  if (recipes.hasOwnProperty(recipe_name)) return 1;
   return 0;
 }
 
@@ -56,7 +57,7 @@ const Schedule = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => {
           check_if_recipe_exists(item.name.split(" ").slice(2)) == 1
-            ? navigation.navigate("Recipe")
+            ? navigation.navigate("Recipe", item.name.split(" ").slice(2))
             : Alert.alert("Sorry! There is no recipe available for this meal.");
         }}
         style={{ marginRight: 10, marginTop: 17 }}

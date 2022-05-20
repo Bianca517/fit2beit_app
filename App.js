@@ -42,7 +42,7 @@ function App() {
         <Stack.Screen name="Quotes" component={MoodPage} />
         <Stack.Screen name="To Do" component={ToDo} />
         <Stack.Screen name="Menus" component={MenusPage} />
-        <Stack.Screen name="Recipes" component={RecipePage} />
+        <Stack.Screen name="Recipe" component={RecipePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
