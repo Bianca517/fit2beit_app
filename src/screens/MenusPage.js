@@ -10,7 +10,7 @@ const timeToString = time => {
   return date.toISOString().split("T")[0];
 };
 
-const meals = ["Breakfast", "Snack1", "Lunch", "Snack2", "Dinner"];
+const meals = ["Breakfast", "Snack 1", "Lunch", "Snack 2", "Dinner"];
 
 import mealPlans from "../assets/mealPlans/mealPlans.js";
 import recipes from "../assets/recipes/recipes.js";
@@ -85,7 +85,7 @@ const Schedule = ({ navigation }) => {
       <Agenda
         items={items}
         loadItemsForMonth={loadItems}
-        selected={"2022-05-18"}
+        selected={"2022-05-31"}
         renderItem={renderItem}
       />
     </View>
