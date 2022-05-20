@@ -14,6 +14,7 @@ import UpperBody from "./src/screens/UpperBody.js";
 import MoodPage from "./src/screens/MoodPage.js";
 import ToDo from "./src/screens/ToDo";
 import MenusPage from "./src/screens/MenusPage.js";
+import RecipePage from "./src/screens/RecipePage.js";
 
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -41,6 +42,7 @@ function App() {
         <Stack.Screen name="Quotes" component={MoodPage} />
         <Stack.Screen name="To Do" component={ToDo} />
         <Stack.Screen name="Menus" component={MenusPage} />
+        <Stack.Screen name="Recipes" component={RecipePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
