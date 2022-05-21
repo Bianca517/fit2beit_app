@@ -16,7 +16,6 @@ import mealPlans from "../assets/mealPlans/mealPlans.js";
 import recipes from "../assets/recipes/recipes.js";
 
 function check_if_recipe_exists(recipe_name) {
-  console.warn("aici MP" + recipe_name);
   if (recipes.hasOwnProperty(recipe_name)) return 1;
   return 0;
 }
