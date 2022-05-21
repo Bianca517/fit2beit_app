@@ -21,6 +21,8 @@ const LoginPage = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   function handleLogin() {
+    navigation.navigate("Home");
+    /*
     auth
       .signInWithEmailAndPassword(email, password)
       .then(cred => {
@@ -28,6 +30,7 @@ const LoginPage = ({ navigation }) => {
         navigation.navigate("Home");
       })
       .catch(err => alert(err.message));
+      */
   }
 
   return (
