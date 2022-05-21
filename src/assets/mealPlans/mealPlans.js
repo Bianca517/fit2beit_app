@@ -2,14 +2,14 @@ const mealPlans = {
   0: {
     0: ["Iaurt si fulgi porumb", require("../images/menus/mealPlan0/breakfast.jpg")],
     1: ["Mar", require("../images/menus/mealPlan0/snack1.jpg")],
-    2: ["Piept de pui cu cartofi", require("../images/menus/mealPlan0/lunch.jpg")],
+    2: ["Paste cu sos de creveti", require("../images/menus/mealPlan0/lunch.jpg")],
     3: ["Iaurt si caju", require("../images/menus/mealPlan0/snack2.jpg")],
     4: ["Orez cu legume si ton", require("../images/menus/mealPlan0/dinner.jpg")],
   },
   1: {
     0: ["Toast cu avocado", require("../images/menus/mealPlan1/breakfast.jpg")],
     1: ["Protein Bar", require("../images/menus/mealPlan1/snack1.png")],
-    2: ["Pui cu orez si ciuperci", require("../images/menus/mealPlan1/lunch.jpg")],
+    2: ["Pui malaesian cu satay", require("../images/menus/mealPlan1/lunch.jpg")],
     3: ["Banana, unt de arahide", require("../images/menus/mealPlan1/snack2.jpg")],
     4: ["Salata de ton", require("../images/menus/mealPlan1/dinner.jpg")],
   },
@@ -60,14 +60,14 @@ const mealPlans = {
   8: {
     0: ["Iaurt si fulgi porumb", require("../images/menus/mealPlan0/breakfast.jpg")],
     1: ["Mar", require("../images/menus/mealPlan0/snack1.jpg")],
-    2: ["Piept de pui cu cartofi", require("../images/menus/mealPlan0/lunch.jpg")],
+    2: ["Paste cu sos de creveti", require("../images/menus/mealPlan0/lunch.jpg")],
     3: ["Iaurt si caju", require("../images/menus/mealPlan0/snack2.jpg")],
     4: ["Orez cu legume si ton", require("../images/menus/mealPlan0/dinner.jpg")],
   },
   9: {
     0: ["Toast cu avocado", require("../images/menus/mealPlan1/breakfast.jpg")],
     1: ["Protein Bar", require("../images/menus/mealPlan1/snack1.png")],
-    2: ["Pui cu orez si ciuperci", require("../images/menus/mealPlan1/lunch.jpg")],
+    2: ["Pui malaesian cu satay", require("../images/menus/mealPlan1/lunch.jpg")],
     3: ["Banana, unt de arahide", require("../images/menus/mealPlan1/snack2.jpg")],
     4: ["Salata de ton", require("../images/menus/mealPlan1/dinner.jpg")],
   },

@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   h2: {
-    fontFamily: "Roboto-Bold",
+    //fontFamily: "Roboto-Bold",
     fontSize: 22,
     lineHeight: 30,
   },

@@ -47,7 +47,7 @@ const recipes = {
   "Pui malaesian cu satay": {
     id: 2,
     name: "Malaysian Chicken Satay",
-    image: require("../images/menus/mealPlan0/lunch.jpg"),
+    image: require("../images/menus/mealPlan1/lunch.jpg"),
     duration: "50 mins",
     serving: 10,
     ingredients: [
