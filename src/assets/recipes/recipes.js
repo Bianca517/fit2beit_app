@@ -1,5 +1,5 @@
 const recipes = {
-  "Terci de ovaz": {
+  "Paste cu sos de creveti": {
     id: 1,
     name: "Spaghetti With Shrimp Sauce",
     image: require("../images/menus/mealPlan0/lunch.jpg"),
@@ -41,6 +41,45 @@ const recipes = {
         icon: require("../images/icons/pepper.png"),
         description: "Black Pepper",
         quantity: "¼ tbsp",
+      },
+    ],
+  },
+  "Pui malaesian cu satay": {
+    id: 2,
+    name: "Malaysian Chicken Satay",
+    image: require("../images/menus/mealPlan0/lunch.jpg"),
+    duration: "50 mins",
+    serving: 10,
+    ingredients: [
+      {
+        id: 1,
+        icon: require("../images/icons/chicken.png"),
+        description: "Boneless Chicken Thighs",
+        quantity: "1kg",
+      },
+      {
+        id: 2,
+        icon: require("../images/icons/lemongrass.png"),
+        description: "Lemongrass stalk",
+        quantity: "1 stalk",
+      },
+      {
+        id: 3,
+        icon: require("../images/icons/onion.png"),
+        description: "Large Onion",
+        quantity: "1",
+      },
+      {
+        id: 4,
+        icon: require("../images/icons/garlic.png"),
+        description: "Garlic cloves",
+        quantity: "5",
+      },
+      {
+        id: 5,
+        icon: require("../images/icons/coriander.png"),
+        description: "Coriander",
+        quantity: "1 tsp",
       },
     ],
   },
