@@ -87,7 +87,7 @@ const RecipePage = ({ navigation, route }) => {
   function renderIngredientHeader() {
     return (
       <View styles={styles.viewIngredientHeader}>
-        <Text style={{ flex: 1, fontSize: 16, marginLeft: 25 }}>
+        <Text style={{ flex: 1, fontSize: 18, marginLeft: 25 }}>
           {" "}
           Ingredients{" "}
         </Text>
@@ -107,25 +107,31 @@ const RecipePage = ({ navigation, route }) => {
 
   function renderTextRecipe() {
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          paddingHorizontal: 20,
-          justifyContent: "center",
-          width: WIDTH,
-        }}
-      >
-        <Text style={{ fontSize: 16, marginLeft: 5 }}> Steps </Text>
-        <Text style={{ fontSize: 16, marginLeft: 25, textAlign: "left" }}>
-          se face aluat, se lasa la dospit, se pune la cuptor
+      <View styles={styles.viewIngredientHeader}>
+        <Text style={{ marginTop: 15, fontSize: 18, marginLeft: 25 }}>
+          {" "}
+          Steps{" "}
+        </Text>
+        <Text
+          style={{
+            marginTop: 20,
+            marginLeft: 30,
+            marginRight: 30,
+            marginBottom: 30,
+            paddingLeft: 10,
+            fontSize: 18,
+            textAlign: "justify",
+            marginLeft: 20,
+          }}
+        >
+          {recipes[selectedRecipe]["steps"]}
         </Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.viewContainer}>
+    <ScrollView style={styles.viewContainer}>
       <Animated.FlatList
         data={recipes[selectedRecipe]["ingredients"]}
         keyExtractor={item => `&{item.id}`}
@@ -143,7 +149,9 @@ const RecipePage = ({ navigation, route }) => {
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true }
+          {
+            useNativeDriver: true,
+          }
         )}
         renderItem={({ item }) => (
           <View style={styles.viewIngredients}>
@@ -157,6 +165,7 @@ const RecipePage = ({ navigation, route }) => {
                 backgroundColor: "#D3D3D3",
               }}
             >
+              {/* ICON */}
               <Image
                 source={item.icon}
                 style={{
@@ -175,29 +184,9 @@ const RecipePage = ({ navigation, route }) => {
             </View>
           </View>
         )}
-        renderSteps={
-          <View
-            style={{
-              flexDirection: 1,
-              paddingHorizontal: 30,
-              marginVertical: 5,
-              backgroundColor: "#FFF25F",
-            }}
-          ></View>
-        }
-      />
-      <View
-        style={{
-          width: WIDTH,
-          flex: 1,
-          marginBottom: 50,
-          backgroundColor: "#D3D3D3",
-        }}
-      >
-        {/* DE CE NU APARE??? */}
-        {renderTextRecipe()}
-      </View>
-    </View>
+      ></Animated.FlatList>
+      {renderTextRecipe()}
+    </ScrollView>
   );
 };
 
