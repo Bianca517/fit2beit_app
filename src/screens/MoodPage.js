@@ -81,7 +81,7 @@ function MoodPage(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.chooseMood}>How are you feeling today?</Text>
-      <TouchableOpacity onPress={{ modalTrigger }}>
+      <TouchableOpacity onPress={modalTrigger}>
         <Image
           source={require("../assets/images/happy.jpg")}
           style={styles.happyface}

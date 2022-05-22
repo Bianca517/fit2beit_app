@@ -9,6 +9,7 @@ import {
   Platform,
   Dimensions,
   ScrollView,
+  LogBox,
 } from "react-native";
 
 //import { BlurView } from "react-native-community/blur";
@@ -22,6 +23,11 @@ const RecipePage = ({ navigation, route }) => {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const selectedRecipe = route.params;
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    LogBox.ignoreLogs(["Encountered two children with the same key"]);
+  }, []);
 
   function renderRecipeCardHeader() {
     return (

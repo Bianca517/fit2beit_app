@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -9,7 +9,8 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
-  Keyboard
+  Keyboard,
+  LogBox,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TouchableWithoutFeedback } from "react-native-web";
@@ -23,6 +24,13 @@ const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native"]);
+    LogBox.ignoreLogs([
+      "AsyncStorage has been extracted from react-native core",
+    ]);
+  }, []);
+
   function handleLogin() {
     auth
       .signInWithEmailAndPassword(email, password)
@@ -34,83 +42,83 @@ const LoginPage = ({ navigation }) => {
   }
 
   return (
-   <KeyboardAwareScrollView
-    behavior="padding"
-    style={styles.keyboardAwareScrollView}
-  >
-    <TouchableWithoutFeedback
+    <KeyboardAwareScrollView
+      behavior="padding"
+      style={styles.keyboardAwareScrollView}
+    >
+      <TouchableWithoutFeedback
         onPress={Keyboard.dismiss}
         style={styles.container}
       >
-    <View style={styles.container}>
-      <View style={styles.background}>
-        <View style={styles.imageStack}>
-          <ImageBackground
-            source={require("../assets/images/StartPage_Banner.jpeg")}
-            resizeMode="cover"
-            style={styles.image}
-            imageStyle={styles.image_imageStyle}
-            blurRadius= {3}
-          >
-            <View style={styles.goToSignUp}>
-              <View style={styles.containerSignUp}>
-                <View style={styles.newMemberStack}>
-                  <Text style={styles.newMember}>New Member ?</Text>
-                  <View style={styles.signUp}>
-                    <Button
-                      title="Sign In"
-                      color="#1f7ed3"
-                      onPress={() => navigation.navigate("Register")}
-                    />
+        <View style={styles.container}>
+          <View style={styles.background}>
+            <View style={styles.imageStack}>
+              <ImageBackground
+                source={require("../assets/images/loginbackground.jpeg")}
+                resizeMode="cover"
+                style={styles.image}
+                imageStyle={styles.image_imageStyle}
+                blurRadius={2}
+              >
+                <View style={styles.goToSignUp}>
+                  <View style={styles.containerSignUp}>
+                    <View style={styles.newMemberStack}>
+                      <Text style={styles.newMember}>New Member ?</Text>
+                      <View style={styles.signUp}>
+                        <Button
+                          title="Sign In"
+                          color="#1f7ed3"
+                          onPress={() => navigation.navigate("Register")}
+                        />
+                      </View>
+                    </View>
                   </View>
                 </View>
+              </ImageBackground>
+              <View style={styles.title}>
+                <View style={styles.fitStack}>
+                  <Text style={styles.fit}>FIT</Text>
+                  <Text style={styles.toBe}>2BE</Text>
+                  <Text style={styles.it}>IT</Text>
+                </View>
               </View>
-            </View>
-          </ImageBackground>
-          <View style={styles.title}>
-            <View style={styles.fitStack}>
-              <Text style={styles.fit}>FIT</Text>
-              <Text style={styles.toBe}>2BE</Text>
-              <Text style={styles.it}>IT</Text>
+              <View style={styles.textInputs}>
+                <TextInput
+                  placeholder="Password"
+                  textBreakStrategy="simple"
+                  dataDetector="address"
+                  placeholderTextColor="rgba(255,255,255,1)"
+                  color="rgba(255,255,255,1)"
+                  clearTextOnFocus={true}
+                  secureTextEntry={true}
+                  selectionColor="rgba(230, 230, 230,1)"
+                  onChangeText={value => setPassword(value)}
+                  style={styles.emailAddress}
+                ></TextInput>
+                <TextInput
+                  placeholder="Email Address"
+                  color="rgba(255,255,255,1)"
+                  textBreakStrategy="simple"
+                  dataDetector="address"
+                  placeholderTextColor="rgba(255,255,255,1)"
+                  clearTextOnFocus={true}
+                  selectionColor="rgba(230, 230, 230,1)"
+                  onChangeText={value => setEmail(value)}
+                  style={styles.password}
+                ></TextInput>
+              </View>
+              <TouchableOpacity style={styles.loginButton}>
+                <TouchableOpacity
+                  style={styles.buttonRectangle}
+                  onPress={() => handleLogin()}
+                >
+                  <Text style={styles.loginText}>Login</Text>
+                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.textInputs}>
-            <TextInput
-              placeholder="Password"
-              textBreakStrategy="simple"
-              dataDetector="address"
-              placeholderTextColor="rgba(255,255,255,1)"
-              color="rgba(255,255,255,1)"
-              clearTextOnFocus={true}
-              secureTextEntry={true}
-              selectionColor="rgba(230, 230, 230,1)"
-              onChangeText={value => setPassword(value)}
-              style={styles.emailAddress}
-            ></TextInput>
-            <TextInput
-              placeholder="Email Address"
-              color="rgba(255,255,255,1)"
-              textBreakStrategy="simple"
-              dataDetector="address"
-              placeholderTextColor="rgba(255,255,255,1)"
-              clearTextOnFocus={true}
-              selectionColor="rgba(230, 230, 230,1)"
-              onChangeText={value => setEmail(value)}
-              style={styles.password}
-            ></TextInput>
-          </View>
-          <TouchableOpacity style={styles.loginButton}>
-            <TouchableOpacity
-              style={styles.buttonRectangle}
-              onPress={() => handleLogin()}
-            >
-              <Text style={styles.loginText}>Login</Text>
-            </TouchableOpacity>
-          </TouchableOpacity>
         </View>
-      </View>
-    </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
   );
 };
@@ -169,8 +177,8 @@ const styles = StyleSheet.create({
     marginTop: -3,
     marginLeft: 3,
     padding: 2,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    fontWeight: "bold",
+    textDecorationLine: "underline",
   },
   newMemberStack: {
     width: 250,

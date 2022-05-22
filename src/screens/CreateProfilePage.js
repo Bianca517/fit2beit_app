@@ -18,6 +18,7 @@ import {
 import { Alert, TouchableWithoutFeedback } from "react-native-web";
 import { getActiveChildNavigationOptions } from "react-navigation";
 
+import HomePage from "./HomePage";
 import { auth, db } from "../../firebase";
 import { ScreenStackHeaderRightView } from "react-native-screens";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -32,6 +33,12 @@ const CreateProfilePage = ({ route, navigation }) => {
   const [height, setHeight] = useState();
 
   const { uid, email, password } = route.params;
+
+  /*
+  useEffect(() => {
+    console.warn("gender " + gender);
+    console.warn("goal " + selectedGoal);
+  });*/
 
   function addUserDetails() {
     return db
@@ -52,11 +59,12 @@ const CreateProfilePage = ({ route, navigation }) => {
   return (
     <KeyboardAwareScrollView behavior="padding">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView
-          style={styles.ScrollView}
-          contentContainerStyle={{ flexGrow: 1 }}
-        >
-          <View style={styles.background1}>
+        <View style={styles.background1}>
+          <ScrollView
+            style={{
+              backgroundColor: "#000000",
+            }}
+          >
             <View style={styles.rect1Stack}>
               <ImageBackground
                 source={require("../assets/images/RegisterBkd.jpg")}
@@ -77,7 +85,7 @@ const CreateProfilePage = ({ route, navigation }) => {
                     value={firstName}
                     onChangeText={value => {
                       if (value.length != 0) setFirstName(value);
-                      console.warn(firstName);
+                      //console.warn(firstName);
                     }}
                     selectionColor="rgba(255,255,255,1)"
                     style={styles.firstName}
@@ -106,9 +114,9 @@ const CreateProfilePage = ({ route, navigation }) => {
                   <Text style={styles.selectYourGender}>Gender:</Text>
                   <Picker
                     selectedValue={gender}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setGender(itemValue)
-                    }
+                    onValueChange={(itemValue, itemIndex) => {
+                      setGender(itemValue.toString());
+                    }}
                     style={styles.genderPicker}
                   >
                     <Picker.Item
@@ -147,9 +155,9 @@ const CreateProfilePage = ({ route, navigation }) => {
                   <Text style={styles.selectYourGoal}>Select Your Goal:</Text>
                   <Picker
                     selectedValue={selectedGoal}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedGoal(itemValue)
-                    }
+                    onValueChange={(itemValue, itemIndex) => {
+                      setSelectedGoal(itemValue);
+                    }}
                     style={styles.goalPicker}
                   >
                     <Picker.Item
@@ -173,6 +181,7 @@ const CreateProfilePage = ({ route, navigation }) => {
                   <TouchableOpacity
                     onPress={() => {
                       addUserDetails();
+                      navigation.navigate("Home");
                     }}
                     style={styles.buttonRectangle1}
                   >
@@ -181,8 +190,8 @@ const CreateProfilePage = ({ route, navigation }) => {
                 </TouchableOpacity>
               </ImageBackground>
             </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
   );
@@ -190,13 +199,16 @@ const CreateProfilePage = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
+    height: "100%",
     justifyContent: "center",
+    backgroundColor: "#000000",
   },
   background1: {
     width: 602,
     height: 900,
     alignSelf: "center",
+    backgroundColor: "#000000",
   },
   rect1: {
     top: 219,
@@ -204,7 +216,7 @@ const styles = StyleSheet.create({
     width: 394,
     height: 680,
     position: "absolute",
-    backgroundColor: "rgba(53,46,46,1)",
+    backgroundColor: "#00000",
     opacity: 0.43,
   },
   loginButton1: {
@@ -278,7 +290,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Roboto",
     color: "white",
     height: 48,
-    width: 122,
+    width: 243,
     fontSize: 23,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,1)",
@@ -286,7 +298,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
-    marginTop: 15,
+    marginTop: 17,
   },
   selectYourGender: {
     //fontFamily: "Roboto",
@@ -347,9 +359,9 @@ const styles = StyleSheet.create({
     marginTop: -70,
     //fontFamily: "Roboto",
   },
-  ScrollView: {
+  scrollView: {
     height: "1%",
-    backgroundColor: "black",
+    backgroundColor: "#0000000",
     automaticallyAdjustsScrollIndicatorInsets: true,
   },
 });

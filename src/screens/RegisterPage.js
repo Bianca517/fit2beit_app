@@ -117,7 +117,7 @@ const RegisterPage = ({ navigation }) => {
                   //ref="email"
                   defaultValue={email}
                   onChangeText={value => {
-                    console.warn(email);
+                    //console.warn(email);
                     if (value.trim().length !== 0) setEmail(value);
                   }}
                   style={styles.emailAddress}
