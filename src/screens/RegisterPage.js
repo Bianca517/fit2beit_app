@@ -14,10 +14,10 @@ import {
 
 import { TouchableWithoutFeedback } from "react-native-web";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { getActiveChildNavigationOptions } from "react-navigation";
+/*
 import { Logs } from "expo";
 
-Logs.enableExpoCliLogging();
+Logs.enableExpoCliLogging();*/
 
 import CreateProfilePage from "./CreateProfilePage";
 import { auth, db } from "../../firebase";
