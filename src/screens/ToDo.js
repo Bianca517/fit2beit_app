@@ -81,6 +81,7 @@ export default function ToDo() {
             })}
           </View>
         </View>
+      
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.writeTaskWrapper}

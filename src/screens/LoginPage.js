@@ -111,6 +111,7 @@ const LoginPage = ({ navigation }) => {
                 <TouchableOpacity
                   style={styles.buttonRectangle}
                   onPress={() => handleLogin()}
+                  testId = 'loginButton'
                 >
                   <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>

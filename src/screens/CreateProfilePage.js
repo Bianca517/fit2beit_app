@@ -16,11 +16,10 @@ import {
 } from "react-native";
 
 import { Alert, TouchableWithoutFeedback } from "react-native-web";
-import { getActiveChildNavigationOptions } from "react-navigation";
+
 
 import HomePage from "./HomePage";
 import { auth, db } from "../../firebase";
-import { ScreenStackHeaderRightView } from "react-native-screens";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CreateProfilePage = ({ route, navigation }) => {
