@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { Component } from "react";
+import React, { setState } from "react";
 import {
   StyleSheet,
   View,
