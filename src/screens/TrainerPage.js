@@ -7,16 +7,19 @@ import {
   Text,
   TextInput,
   Alert,
-  TouchableOpacity
+  Keyboard,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { TouchableWithoutFeedback } from "react-native-web";
 
-var RNFS = require("react-native-fs");
+import * as FileSystem from "expo-file-system";
+import { StorageAccessFramework } from "expo-file-system";
+//import { fs } from "fs";
+
+//var RNFS = require("react-native-fs");
 var path = "../assets/trainer/trainerMenusAndWorkouts.txt";
-
-function addListener(eventName) {}
 
 const TrainerPage=({navigation}) => {
   const [selectedWorkout, setSelectedWorkout] = useState();
@@ -24,7 +27,7 @@ const TrainerPage=({navigation}) => {
   const [menu, setMenu] = useState();
 
   function writeFile() {
-    const stringToWrite = "";
+    let stringToWrite = "";
     if (menu !== null) stringToWrite += "\nMenu: " + menu;
 
     if (workoutLink !== null)
@@ -32,12 +35,12 @@ const TrainerPage=({navigation}) => {
         "\nSelected Workout" + selectedWorkout + "\nLink: " + workoutLink;
 
     if (stringToWrite !== null) {
-      RNFS.writeFile(path, stringToWrite, "utf8")
+      FileSystem.writeAsStringAsync(path, stringToWrite, "ascii")
         .then(success => {
-          console.log("FILE WRITTEN!");
+          Alert.alert("Your workout / menu was added. Thank you!");
         })
         .catch(err => {
-          console.log(err.message);
+          console.warn(err.message);
         });
     } else {
       Alert.alert("Please complete each text input!");
@@ -99,10 +102,8 @@ const TrainerPage=({navigation}) => {
             />
             <Picker.Item color="#121212" label="Full Body" value="full_body" />
           </Picker>
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={() => writeFile()}
-          >
+
+          <TouchableOpacity onPress={writeFile()} style={styles.submitButton}>
             <Text style={styles.submitText}>Submit</Text>
           </TouchableOpacity>
         </View>
@@ -114,6 +115,7 @@ const TrainerPage=({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignContent: "center",
   },
   group: {
     width: 254,
@@ -169,22 +171,27 @@ const styles = StyleSheet.create({
   },
   workoutsPicker: {
     marginTop: -30,
+    marginLeft: -5,
   },
   submitButton: {
-    top: 480,
-    left: 102,
-    width: 274,
+    marginTop: 600,
+    left: 105,
+    width: 150,
     height: 49,
     position: "absolute",
+    backgroundColor: "#E6E6E6",
+    borderRadius: 50,
+    alignContent: "center",
+    alignSelf: "center",
   },
   submitText: {
     //fontFamily: "roboto-700",
-    color: "#1f7ed3",
+    color: "#000",
     fontSize: 20,
     height: 41,
     width: 160,
     marginTop: 10,
-    marginLeft: "25%",
+    marginLeft: "29%",
     alignItems: "center",
   },
 });
