@@ -12,9 +12,9 @@ import {
   Button,
   Keyboard,
   LogBox,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { TouchableWithoutFeedback } from "react-native-web";
 
 import TrainerPage from "./TrainerPage.js";
 import HomePage from "./HomePage";
@@ -53,7 +53,7 @@ const LoginPage = ({ navigation }) => {
         .then(cred => {
           navigation.navigate("Trainer");
         })
-        .catch(err => alert(err.message));
+        .catch(err => alert("aici" + err.message));
     } else {
       Alert.alert("You do not have the rights to log in as a trainer!");
     }
