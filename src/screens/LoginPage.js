@@ -109,6 +109,7 @@ const LoginPage = ({ navigation }) => {
                   secureTextEntry={true}
                   selectionColor="rgba(230, 230, 230,1)"
                   onChangeText={value => setPassword(value)}
+                  value={password}
                   style={styles.emailAddress}
                 ></TextInput>
                 <TextInput
@@ -120,15 +121,15 @@ const LoginPage = ({ navigation }) => {
                   clearTextOnFocus={true}
                   selectionColor="rgba(230, 230, 230,1)"
                   onChangeText={value => setEmail(value)}
+                  value={email}
                   style={styles.password}
                 ></TextInput>
               </View>
               <TouchableOpacity style={styles.loginButton1}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
-                  onPress={() => {
-                    handleLoginButtonClient();
-                  }}
+                  onPress={() => {handleLoginButtonClient(), setEmail({email: ''}), setPassword({password: ''})}
+              }
                   testId="loginButtonclient"
                 >
                   <Text style={styles.loginText}>Login as a Client</Text>
@@ -137,7 +138,8 @@ const LoginPage = ({ navigation }) => {
               <TouchableOpacity style={styles.loginButton2}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
-                  onPress={() => handleLoginButtonTrainer()}
+                  onPress={() => {handleLoginButtonTrainer(), setEmail({email: ''}), setPassword({password: ''})}
+                }
                   testId = 'loginButtontrainer'
                 >
                   
