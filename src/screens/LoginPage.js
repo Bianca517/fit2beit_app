@@ -11,13 +11,13 @@ import {
   Button,
   Keyboard,
   LogBox,
+  Alert
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TouchableWithoutFeedback } from "react-native-web";
 
 import HomePage from "./HomePage";
 import RegisterPage from "./RegisterPage";
-import { Alert } from "react-native-web";
 import { auth } from "../../firebase";
 
 const LoginPage = ({ navigation }) => {
@@ -137,7 +137,7 @@ const LoginPage = ({ navigation }) => {
               <TouchableOpacity style={styles.loginButton2}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
-                  onPress={() => handleLogin()}
+                  onPress={() => handleLoginButtonTrainer()}
                   testId = 'loginButtontrainer'
                 >
                   
