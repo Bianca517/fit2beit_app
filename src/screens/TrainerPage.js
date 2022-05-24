@@ -19,7 +19,7 @@ import { db } from "../../firebase";
 
 const fileUri = "../assets/trainer/text.txt";
 
-function TrainerPage(props) {
+const TrainerPage=({navigation}) => {
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [workoutLink, setWorkoutLink] = useState();
   const [menu, setMenu] = useState();
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginLeft: 61,
   },
   image: {
-    width: 482,
+    width: 520,
     height: 850,
     marginTop: -104,
     marginLeft: -167,
