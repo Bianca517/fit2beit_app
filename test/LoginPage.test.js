@@ -1,19 +1,23 @@
-import React from 'react'
-import LoginPage from '../src/screens/LoginPage'
-import {fireEvent, render} from '@testing-library/react-native';
-import mockStore from 'redux-mock-store';
-global.__fbBatchedBridgeConfig = require('./bridge-mock');
-describe('Login screen', () => {
+import React from "react";
+import { WorkoutsPage } from "../src/screens/WorkoutsPage";
+import { fireEvent, render } from "@testing-library/react-native";
 
-  it('should go to home from login button', () => {
-    const navigation = {navigate: () => {}}
-    spyOn(navigation, 'navigate');
-    const page = render(<LoginPage navigation={navigation} />);
+jest.mock("../src/screens/WorkoutsPage");
+describe("Login page tests", () => {
+  it("should go to home from login button", () => {
+    const navigation = { navigate: () => {} };
+    spyOn(navigation, "navigate");
+    const page = render(<WorkoutsPage navigation={navigation} />);
 
-    const loginButton = page.getByTestId('loginButton');
+    const loginButton = page.getByTestId("upperBodyButton");
 
     fireEvent.press(loginButton);
-    expect(navigation.navigate).toHaveBeenCalledWith('Home');
-  })
-}
-)
+    expect(navigation.navigate).toHaveBeenCalledWith("Upper Body Workouts");
+  });
+
+  /*
+  test("validate function", () => {
+    const text = "text@test.com";
+    expect(validateInput(text)).toBe(true);
+  });*/
+});

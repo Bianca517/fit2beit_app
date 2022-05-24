@@ -10,6 +10,24 @@
     "eject": "expo eject",
     "test": "jest --verbose"
   },
+  "jest": {
+    
+    "globals": {
+      "__DEV__": true
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@react-native|react-native)",
+      "node_modules/(?!react-native|)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "dependencies": {
     "@eva-design/eva": "^2.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -71,23 +89,6 @@
     "@testing-library/react-native": "^9.1.0",
     "jest": "^28.1.0",
     "react-native-bundle-visualizer": "^3.1.1"
-  },
-  "jest": {
-    "globals": {
-      "__DEV__": true
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@react-native|react-native)",
-      "node_modules/(?!react-native|)"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   },
   "private": true,
   "rnpm": {
