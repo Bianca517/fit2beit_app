@@ -6,60 +6,107 @@ import {
   ImageBackground,
   Text,
   TextInput,
-  Picker,
+  Alert,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { TouchableWithoutFeedback } from "react-native-web";
+
+var RNFS = require("react-native-fs");
+var path = "../assets/trainer/trainerMenusAndWorkouts.txt";
+
+function addListener(eventName) {}
 
 function TrainerPage(props) {
   const [selectedWorkout, setSelectedWorkout] = useState();
+  const [workoutLink, setWorkoutLink] = useState();
+  const [menu, setMenu] = useState();
+
+  function writeFile() {
+    const stringToWrite = "";
+    if (menu !== null) stringToWrite += "\nMenu: " + menu;
+
+    if (workoutLink !== null)
+      stringToWrite +=
+        "\nSelected Workout" + selectedWorkout + "\nLink: " + workoutLink;
+
+    if (stringToWrite !== null) {
+      RNFS.writeFile(path, stringToWrite, "utf8")
+        .then(success => {
+          console.log("FILE WRITTEN!");
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    } else {
+      Alert.alert("Please complete each text input!");
+    }
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.group}>
-        <ImageBackground
-          source={require("../assets/images/TrainerPageBkd1.jpg")}
-          resizeMode="contain"
-          style={styles.image}
-          imageStyle={styles.image_imageStyle}
-        >
-          <Text style={styles.title}>Add Your Workouts &amp; Menus</Text>
-          <TextInput
-            placeholder="Add A Menu"
-            placeholderTextColor="rgba(0,0,0,1)"
-            multiline={true}
-            style={styles.placeholder}
-          ></TextInput>
-        </ImageBackground>
-      </View>
-      <TextInput
-        placeholder="Insert Workout Link"
-        placeholderTextColor="rgba(0,0,0,1)"
-        multiline={false}
-        style={styles.placeholder1}
-      ></TextInput>
-      <Picker
-        selectedValue={selectedWorkout}
-        onValueChange={(itemValue, itemIndex) => {
-          setSelectedWorkout(itemValue);
-        }}
-        style={styles.goalPicker}
+    <KeyboardAwareScrollView
+      behavior="padding"
+      style={styles.keyboardAwareScrollView}
+    >
+      <TouchableWithoutFeedback
+        onPress={Keyboard.dismiss}
+        style={styles.container}
       >
-        <Picker.Item
-          color="rgba(255,255,255,1)"
-          label="Upper Body"
-          value="upper_body"
-        />
-        <Picker.Item
-          color="rgba(255,255,255,1)"
-          label="Lower Body"
-          value="lower_body"
-        />
-        <Picker.Item
-          color="rgba(255,255,255,1)"
-          label="Full Body"
-          value="full_body"
-        />
-      </Picker>
-    </View>
+        <View style={styles.container}>
+          <View style={styles.group}>
+            <ImageBackground
+              source={require("../assets/images/TrainerPageBkd.jpg")}
+              resizeMode="contain"
+              style={styles.image}
+              imageStyle={styles.image_imageStyle}
+            >
+              <Text style={styles.title}>Add Your Workouts &amp; Menus</Text>
+              <TextInput
+                placeholder="Add A Menu"
+                placeholderTextColor="rgba(0,0,0,1)"
+                multiline={true}
+                value={menu}
+                onChangeText={value => setMenu(value)}
+                style={styles.placeholder}
+              ></TextInput>
+            </ImageBackground>
+          </View>
+          <TextInput
+            placeholder="Insert Workout Link"
+            placeholderTextColor="rgba(0,0,0,1)"
+            multiline={false}
+            value={workoutLink}
+            onChangeText={value => setWorkoutLink(value)}
+            style={styles.placeholder1}
+          ></TextInput>
+          <Picker
+            selectedValue={selectedWorkout}
+            onValueChange={itemValue => {
+              setSelectedWorkout(itemValue);
+            }}
+            style={styles.workoutsPicker}
+          >
+            <Picker.Item
+              color="#121212"
+              label="Upper Body"
+              value="upper_body"
+            />
+            <Picker.Item
+              color="#121212"
+              label="Lower Body"
+              value="lower_body"
+            />
+            <Picker.Item color="#121212" label="Full Body" value="full_body" />
+          </Picker>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => writeFile()}
+          >
+            <Text style={styles.submitText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAwareScrollView>
   );
 }
 
@@ -81,7 +128,7 @@ const styles = StyleSheet.create({
   },
   image_imageStyle: {},
   title: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-regular",
     color: "#121212",
     height: 166,
     width: 254,
@@ -90,7 +137,7 @@ const styles = StyleSheet.create({
     marginLeft: 167,
   },
   placeholder: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-regular",
     color: "#121212",
     height: 50,
     width: 282,
@@ -105,7 +152,7 @@ const styles = StyleSheet.create({
     marginLeft: 153,
   },
   placeholder1: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-regular",
     color: "#121212",
     height: 52,
     width: 282,
@@ -118,6 +165,26 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     marginTop: 130,
     marginLeft: 47,
+  },
+  workoutsPicker: {
+    marginTop: -30,
+  },
+  submitButton: {
+    top: 480,
+    left: 102,
+    width: 274,
+    height: 49,
+    position: "absolute",
+  },
+  submitText: {
+    //fontFamily: "roboto-700",
+    color: "#1f7ed3",
+    fontSize: 20,
+    height: 41,
+    width: 160,
+    marginTop: 10,
+    marginLeft: "25%",
+    alignItems: "center",
   },
 });
 

@@ -15,6 +15,7 @@ import MoodPage from "./src/screens/MoodPage.js";
 import ToDo from "./src/screens/ToDo";
 import MenusPage from "./src/screens/MenusPage.js";
 import RecipePage from "./src/screens/RecipePage.js";
+import TrainerPage from "./src/screens/TrainerPage.js";
 
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -28,7 +29,7 @@ function App() {
         <StatusBar style="auto" />
       </View>*/
 
-   
+    //view login + home + register + create profile + workout
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Log In">
         <Stack.Screen name="Log In" component={LoginPage} />
@@ -43,6 +44,7 @@ function App() {
         <Stack.Screen name="To Do" component={ToDo} />
         <Stack.Screen name="Menus" component={MenusPage} />
         <Stack.Screen name="Recipe" component={RecipePage} />
+        <Stack.Screen name="Trainer" component={TrainerPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
