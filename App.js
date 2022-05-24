@@ -28,7 +28,7 @@ function App() {
         <StatusBar style="auto" />
       </View>*/
 
-    //view login + home + register + create profile + workout
+   
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Log In">
         <Stack.Screen name="Log In" component={LoginPage} />

@@ -58,6 +58,15 @@ const HomePage = ({ navigation }) => {
               <Text style={styles.buttonText}>QUOTES</Text>
             </TouchableOpacity>
           </View>
+
+          <View style={styles.button5}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Log In")}
+              style={styles.buttonRectangle1}
+            >
+              <Text style={styles.buttonText2}>Log Out</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -74,6 +83,17 @@ const styles = StyleSheet.create({
   buttonText: {
     // fontFamily: "roboto-700",
     color: "black",
+    fontSize: 20,
+    height: 30,
+    width: 150,
+    marginTop: 0,
+    marginLeft: -10,
+    textAlign: "center",
+  },
+
+  buttonText2: {
+    // fontFamily: "roboto-700",
+    color: "#1f7ed3",
     fontSize: 20,
     height: 30,
     width: 150,
@@ -146,6 +166,16 @@ const styles = StyleSheet.create({
     marginRight: 40,
     padding: 20,
     backgroundColor: "white",
+  },
+
+  button5: {
+    marginTop: 290,
+    marginLeft: 10,
+    borderRadius: 100,
+    marginRight: 308,
+    padding: 10,
+    backgroundColor: "#a3bacf",
+    alignItems: 'center'
   },
 });
 

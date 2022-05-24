@@ -132,6 +132,7 @@ const LoginPage = ({ navigation }) => {
                   onPress={() => handleLogin()}
                   testId = 'loginButtontrainer'
                 >
+                  
                   <Text style={styles.loginText}>Login as a Trainer</Text>
                 </TouchableOpacity>
               </TouchableOpacity>
