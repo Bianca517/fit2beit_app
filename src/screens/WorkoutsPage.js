@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+
 import {
   StyleSheet,
   View,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import ButonDailyPlanner from "../components/ButonDailyPlanner";
+
 import FullBody from "./FullBody.js";
 
 const WorkoutsPage = ({ navigation }) => {
@@ -29,6 +29,7 @@ const WorkoutsPage = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => navigation.navigate("Upper Body Workouts")}
                 style={styles.buttonRectangle1}
+                testID="upperBodyButton"
               >
                 <Text style={styles.buttonText}>Upper Body</Text>
               </TouchableOpacity>

@@ -32,13 +32,23 @@ const LoginPage = ({ navigation }) => {
   }, []);
 
   function handleLogin() {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(cred => {
-        //console.warn(cred.user.email + " " + cred.user.password);
-        navigation.navigate("Home");
-      })
-      .catch(err => alert(err.message));
+    if (email === "sportacus@gmail.com") {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(cred => {
+          //console.warn(cred.user.email + " " + cred.user.password);
+          navigation.navigate("TrainerPage");
+        })
+        .catch(err => alert(err.message));
+    } else {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(cred => {
+          //console.warn(cred.user.email + " " + cred.user.password);
+          navigation.navigate("Home");
+        })
+        .catch(err => alert(err.message));
+    }
   }
 
   return (
@@ -111,7 +121,7 @@ const LoginPage = ({ navigation }) => {
                 <TouchableOpacity
                   style={styles.buttonRectangle}
                   onPress={() => handleLogin()}
-                  testId = 'loginButton'
+                  testId="loginButtonclient"
                 >
                   <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>
