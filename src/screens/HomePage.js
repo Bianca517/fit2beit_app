@@ -169,13 +169,13 @@ const styles = StyleSheet.create({
   },
 
   button5: {
-    marginTop: 290,
-    marginLeft: 10,
+    marginTop: 270,
+    marginLeft: 15,
     borderRadius: 100,
     marginRight: 308,
     padding: 10,
     backgroundColor: "#a3bacf",
-    alignItems: 'center'
+    alignItems: "center",
   },
 });
 

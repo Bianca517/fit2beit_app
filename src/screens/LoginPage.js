@@ -13,14 +13,13 @@ import {
   Keyboard,
   LogBox,
   TouchableWithoutFeedback,
-  Alert
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import TrainerPage from "./TrainerPage.js";
 import HomePage from "./HomePage";
 import RegisterPage from "./RegisterPage";
-import { auth } from "../../firebase";
+import { db, auth } from "../../firebase";
 
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -31,6 +30,7 @@ const LoginPage = ({ navigation }) => {
     LogBox.ignoreLogs([
       "AsyncStorage has been extracted from react-native core",
     ]);
+    LogBox.ignoreLogs(["Failed prop type"]);
   }, []);
 
   function handleLoginButtonClient() {
@@ -130,8 +130,11 @@ const LoginPage = ({ navigation }) => {
               <TouchableOpacity style={styles.loginButton1}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
-                  onPress={() => {handleLoginButtonClient(), setEmail({email: ''}), setPassword({password: ''})}
-              }
+                  onPress={() => {
+                    handleLoginButtonClient(),
+                      setEmail({ email: "" }),
+                      setPassword({ password: "" });
+                  }}
                   testId="loginButtonclient"
                 >
                   <Text style={styles.loginText}>Login as a Client</Text>
@@ -140,9 +143,12 @@ const LoginPage = ({ navigation }) => {
               <TouchableOpacity style={styles.loginButton2}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
-                  onPress={() => {handleLoginButtonTrainer(), setEmail({email: ''}), setPassword({password: ''})}
-                }
-                  testId = 'loginButtontrainer'
+                  onPress={() => {
+                    handleLoginButtonTrainer(),
+                      setEmail({ email: "" }),
+                      setPassword({ password: "" });
+                  }}
+                  testId="loginButtontrainer"
                 >
                   <Text style={styles.loginText}>Login as a Trainer</Text>
                 </TouchableOpacity>

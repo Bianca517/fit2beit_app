@@ -19,21 +19,23 @@ import { db } from "../../firebase";
 
 const fileUri = "../assets/trainer/text.txt";
 
-const TrainerPage=({navigation}) => {
+const TrainerPage = ({ navigation }) => {
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [workoutLink, setWorkoutLink] = useState();
   const [menu, setMenu] = useState();
 
   function addTrainerInput() {
-    if (workoutLink !== null)
+    if (workoutLink !== undefined)
       db.collection("Workouts")
         .doc(selectedWorkout)
         .set({
           workoutLink: workoutLink,
         })
         .then(success => console.log(success))
-        .catch(err => alert(err));
-    if (menu !== null) {
+        .catch(err => {
+          alert(err);
+        });
+    if (menu !== undefined) {
       const noMenus = 0;
       db.collection("Menus")
         .get()
@@ -44,9 +46,15 @@ const TrainerPage=({navigation}) => {
               menu: menu,
             })
             .then(success => console.log(success))
-            .catch(err => alert(err));
+            .catch(err => {
+              alert(err);
+            });
         })
         .catch(err => 0);
+
+      if (workoutLink.length > 0 || menu.length > 0)
+        Alert.alert("Succesfully added workouts & menus!");
+      else Alert.alert("You cannout submit both entry fields!");
     }
   }
 
@@ -76,6 +84,14 @@ const TrainerPage=({navigation}) => {
                 onChangeText={value => setMenu(value)}
                 style={styles.placeholder}
               ></TextInput>
+              <View style={styles.button5}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Log In")}
+                  style={styles.buttonRectangle1}
+                >
+                  <Text style={styles.buttonText2}>Log Out</Text>
+                </TouchableOpacity>
+              </View>
             </ImageBackground>
           </View>
           <TextInput
@@ -118,7 +134,7 @@ const TrainerPage=({navigation}) => {
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -201,6 +217,25 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: "29%",
     alignItems: "center",
+  },
+  button5: {
+    marginTop: 320,
+    marginLeft: 130,
+    borderRadius: 100,
+    marginRight: 305,
+    padding: 10,
+    backgroundColor: "#a3bacf",
+    alignItems: "center",
+  },
+  buttonText2: {
+    // fontFamily: "roboto-700",
+    color: "#1f7ed3",
+    fontSize: 20,
+    height: 30,
+    width: 150,
+    marginTop: 0,
+    marginLeft: 0,
+    textAlign: "center",
   },
 });
 
