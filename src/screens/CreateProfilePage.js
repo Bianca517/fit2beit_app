@@ -17,17 +17,16 @@ import {
 
 import { Alert, TouchableWithoutFeedback } from "react-native-web";
 
-
 import HomePage from "./HomePage";
 import { auth, db } from "../../firebase";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const CreateProfilePage = ({ route, navigation }) => {
-  const [selectedGoal, setSelectedGoal] = useState();
+  const [selectedGoal, setSelectedGoal] = useState("Lose Weight");
   const [firstName, setFirstName] = useState();
   const [secondName, setSecondName] = useState();
   const [age, setAge] = useState();
-  const [gender, setGender] = useState();
+  const [gender, setGender] = useState("M");
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
 
