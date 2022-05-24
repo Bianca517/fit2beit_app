@@ -6,17 +6,18 @@ import {
   ImageBackground,
   Text,
   TextInput,
-  Picker,
+  TouchableOpacity
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
-function TrainerPage(props) {
+const TrainerPage=({navigation}) => {
   const [selectedWorkout, setSelectedWorkout] = useState();
 
   return (
     <View style={styles.container}>
       <View style={styles.group}>
         <ImageBackground
-          source={require("../assets/images/TrainerPageBkd1.jpg")}
+          source={require("../assets/images/TrainerPageBkd.jpg")}
           resizeMode="contain"
           style={styles.image}
           imageStyle={styles.image_imageStyle}
@@ -28,7 +29,16 @@ function TrainerPage(props) {
             multiline={true}
             style={styles.placeholder}
           ></TextInput>
+          <View style={styles.button5}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Log In")}
+              style={styles.buttonRectangle1}
+            >
+              <Text style={styles.buttonText2}>Log Out</Text>
+            </TouchableOpacity>
+      </View>
         </ImageBackground>
+        
       </View>
       <TextInput
         placeholder="Insert Workout Link"
@@ -59,6 +69,7 @@ function TrainerPage(props) {
           value="full_body"
         />
       </Picker>
+
     </View>
   );
 }
@@ -74,14 +85,14 @@ const styles = StyleSheet.create({
     marginLeft: 61,
   },
   image: {
-    width: 482,
+    width: 520,
     height: 850,
     marginTop: -104,
     marginLeft: -167,
   },
   image_imageStyle: {},
   title: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-regular",
     color: "#121212",
     height: 166,
     width: 254,
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
     marginLeft: 167,
   },
   placeholder: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-regular",
     color: "#121212",
     height: 50,
     width: 282,
@@ -105,7 +116,7 @@ const styles = StyleSheet.create({
     marginLeft: 153,
   },
   placeholder1: {
-    fontFamily: "roboto-regular",
+    //fontFamily: "roboto-regular",
     color: "#121212",
     height: 52,
     width: 282,
@@ -118,6 +129,25 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     marginTop: 130,
     marginLeft: 47,
+  },
+  button5: {
+    marginTop: 340,
+    marginLeft: 120,
+    borderRadius: 100,
+    marginRight: 305,
+    padding: 10,
+    backgroundColor: "#a3bacf",
+    alignItems: 'center'
+  },
+  buttonText2: {
+    // fontFamily: "roboto-700",
+    color: "#1f7ed3",
+    fontSize: 20,
+    height: 30,
+    width: 150,
+    marginTop: 0,
+    marginLeft: 0,
+    textAlign: "center",
   },
 });
 
