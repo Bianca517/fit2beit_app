@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import {
+  Alert,
   StyleSheet,
   View,
   Image,
@@ -16,6 +17,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { TouchableWithoutFeedback } from "react-native-web";
 
+import TrainerPage from "./TrainerPage.js";
 import HomePage from "./HomePage";
 import RegisterPage from "./RegisterPage";
 import { auth } from "../../firebase";
@@ -142,7 +144,6 @@ const LoginPage = ({ navigation }) => {
                 }
                   testId = 'loginButtontrainer'
                 >
-                  
                   <Text style={styles.loginText}>Login as a Trainer</Text>
                 </TouchableOpacity>
               </TouchableOpacity>
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
     width: 160,
     marginTop: 10,
     marginLeft: "25%",
-    alignItems: 'center'
+    alignItems: "center",
   },
   imageStack: {
     height: 790,
