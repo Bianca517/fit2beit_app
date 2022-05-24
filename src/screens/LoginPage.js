@@ -53,7 +53,7 @@ const LoginPage = ({ navigation }) => {
         .then(cred => {
           navigation.navigate("Trainer");
         })
-        .catch(err => alert("aici" + err.message));
+        .catch(err => alert(err.message));
     } else {
       Alert.alert("You do not have the rights to log in as a trainer!");
     }

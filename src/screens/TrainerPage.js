@@ -1,4 +1,5 @@
 import React, { Component, useState } from "react";
+import { Asset } from "expo";
 import {
   StyleSheet,
   View,
@@ -14,36 +15,38 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import * as FileSystem from "expo-file-system";
-import { StorageAccessFramework } from "expo-file-system";
-//import { fs } from "fs";
+import { db } from "../../firebase";
 
-//var RNFS = require("react-native-fs");
-var path = "../assets/trainer/trainerMenusAndWorkouts.txt";
+const fileUri = "../assets/trainer/text.txt";
 
 function TrainerPage(props) {
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [workoutLink, setWorkoutLink] = useState();
   const [menu, setMenu] = useState();
 
-  function writeFile() {
-    let stringToWrite = "";
-    if (menu !== null) stringToWrite += "\nMenu: " + menu;
-
+  function addTrainerInput() {
     if (workoutLink !== null)
-      stringToWrite +=
-        "\nSelected Workout" + selectedWorkout + "\nLink: " + workoutLink;
-
-    if (stringToWrite !== null) {
-      FileSystem.writeAsStringAsync(path, stringToWrite, "ascii")
-        .then(success => {
-          Alert.alert("Your workout / menu was added. Thank you!");
+      db.collection("Workouts")
+        .doc(selectedWorkout)
+        .set({
+          workoutLink: workoutLink,
         })
-        .catch(err => {
-          console.warn(err.message);
-        });
-    } else {
-      Alert.alert("Please complete each text input!");
+        .then(success => console.log(success))
+        .catch(err => alert(err));
+    if (menu !== null) {
+      const noMenus = 0;
+      db.collection("Menus")
+        .get()
+        .then(documents => {
+          db.collection("Menus")
+            .doc("Menu" + documents.size)
+            .set({
+              menu: menu,
+            })
+            .then(success => console.log(success))
+            .catch(err => alert(err));
+        })
+        .catch(err => 0);
     }
   }
 
@@ -103,7 +106,12 @@ function TrainerPage(props) {
             <Picker.Item color="#121212" label="Full Body" value="full_body" />
           </Picker>
 
-          <TouchableOpacity onPress={writeFile()} style={styles.submitButton}>
+          <TouchableOpacity
+            onPress={() => {
+              addTrainerInput();
+            }}
+            style={styles.submitButton}
+          >
             <Text style={styles.submitText}>Submit</Text>
           </TouchableOpacity>
         </View>
