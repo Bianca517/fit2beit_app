@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { Component } from "react";
+import React, { setState } from "react";
 import {
   StyleSheet,
   View,
@@ -26,7 +26,7 @@ const HomePage = ({ navigation }) => {
           <View style={styles.button1}>
             <TouchableOpacity
               onPress={() => navigation.navigate("Workouts")}
-              style={styles.buttonRectangle1}
+              //style={styles.buttonRectangle1}
             >
               <Text style={styles.buttonText}>WORKOUTS</Text>
             </TouchableOpacity>
@@ -35,7 +35,7 @@ const HomePage = ({ navigation }) => {
           <View style={styles.button2}>
             <TouchableOpacity
               onPress={() => navigation.navigate("Menus")}
-              style={styles.buttonRectangle1}
+              //style={styles.buttonRectangle1}
             >
               <Text style={styles.buttonText}>MENUS</Text>
             </TouchableOpacity>
@@ -44,7 +44,7 @@ const HomePage = ({ navigation }) => {
           <View style={styles.button3}>
             <TouchableOpacity
               onPress={() => navigation.navigate("To Do")}
-              style={styles.buttonRectangle1}
+              //style={styles.buttonRectangle1}
             >
               <Text style={styles.buttonText}>DAILY PLANNER</Text>
             </TouchableOpacity>

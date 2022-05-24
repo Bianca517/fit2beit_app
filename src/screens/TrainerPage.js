@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   Alert,
+  TouchableOpacity
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -17,7 +18,7 @@ var path = "../assets/trainer/trainerMenusAndWorkouts.txt";
 
 function addListener(eventName) {}
 
-function TrainerPage(props) {
+const TrainerPage=({navigation}) => {
   const [selectedWorkout, setSelectedWorkout] = useState();
   const [workoutLink, setWorkoutLink] = useState();
   const [menu, setMenu] = useState();
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     marginLeft: 61,
   },
   image: {
-    width: 482,
+    width: 520,
     height: 850,
     marginTop: -104,
     marginLeft: -167,
