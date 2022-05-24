@@ -31,23 +31,29 @@ const LoginPage = ({ navigation }) => {
     ]);
   }, []);
 
-  function handleLogin() {
+  function handleLoginButtonClient() {
     if (email === "sportacus@gmail.com") {
-      auth
-        .signInWithEmailAndPassword(email, password)
-        .then(cred => {
-          //console.warn(cred.user.email + " " + cred.user.password);
-          navigation.navigate("TrainerPage");
-        })
-        .catch(err => alert(err.message));
+      Alert.alert("Please log in as a trainer!");
     } else {
       auth
         .signInWithEmailAndPassword(email, password)
         .then(cred => {
-          //console.warn(cred.user.email + " " + cred.user.password);
           navigation.navigate("Home");
         })
         .catch(err => alert(err.message));
+    }
+  }
+
+  function handleLoginButtonTrainer() {
+    if (email === "sportacus@gmail.com") {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(cred => {
+          navigation.navigate("Trainer");
+        })
+        .catch(err => alert(err.message));
+    } else {
+      Alert.alert("You do not have the rights to log in as a trainer!");
     }
   }
 
@@ -120,7 +126,9 @@ const LoginPage = ({ navigation }) => {
               <TouchableOpacity style={styles.loginButton1}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
-                  onPress={() => handleLogin()}
+                  onPress={() => {
+                    handleLoginButtonClient();
+                  }}
                   testId="loginButtonclient"
                 >
                   <Text style={styles.loginText}>Login as a Client</Text>
