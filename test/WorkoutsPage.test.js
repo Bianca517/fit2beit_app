@@ -1,10 +1,10 @@
 import React from "react";
-import { validateInput } from "./validate.js";
-import { WorkoutsPage } from "../src/screens/WorkoutsPage";
+import { Schedule, validateInput } from "../src/screens/MenusPage";
 import { fireEvent, render } from "@testing-library/react-native";
 
-jest.mock("../src/screens/WorkoutsPage");
+jest.mock("../src/screens/MenusPage");
 describe("Login page tests", () => {
+  /*
   it("should go to home from login button", () => {
     const navigation = { navigate: () => {} };
     spyOn(navigation, "navigate");
@@ -15,11 +15,9 @@ describe("Login page tests", () => {
     fireEvent.press(loginButton);
     expect(navigation.navigate).toHaveBeenCalledWith("Upper Body Workouts");
   });
-
-  /*
+  */
   test("validate function", () => {
     const text = "text@test.com";
     expect(validateInput(text)).toBe(true);
-  });*/
+  });
 });
-

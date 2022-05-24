@@ -20,6 +20,8 @@ function check_if_recipe_exists(recipe_name) {
   return 0;
 }
 
+export const validateInput = (str = "") => str.includes("@");
+
 const Schedule = ({ navigation }) => {
   const [items, setItems] = useState({});
   const loadItems = day => {
