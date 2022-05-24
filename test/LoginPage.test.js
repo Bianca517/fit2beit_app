@@ -22,3 +22,4 @@ describe("Login page tests", () => {
     expect(validateInput(text)).toBe(true);
   });*/
 });
+

@@ -117,13 +117,22 @@ const LoginPage = ({ navigation }) => {
                   style={styles.password}
                 ></TextInput>
               </View>
-              <TouchableOpacity style={styles.loginButton}>
+              <TouchableOpacity style={styles.loginButton1}>
                 <TouchableOpacity
                   style={styles.buttonRectangle}
                   onPress={() => handleLogin()}
                   testId="loginButtonclient"
                 >
-                  <Text style={styles.loginText}>Login</Text>
+                  <Text style={styles.loginText}>Login as a Client</Text>
+                </TouchableOpacity>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.loginButton2}>
+                <TouchableOpacity
+                  style={styles.buttonRectangle}
+                  onPress={() => handleLogin()}
+                  testId = 'loginButtontrainer'
+                >
+                  <Text style={styles.loginText}>Login as a Trainer</Text>
                 </TouchableOpacity>
               </TouchableOpacity>
             </View>
@@ -277,8 +286,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: -126,
   },
-  loginButton: {
-    top: 493,
+  loginButton1: {
+    top: 480,
+    left: 102,
+    width: 274,
+    height: 49,
+    position: "absolute",
+  },
+  loginButton2: {
+    top: 550,
     left: 102,
     width: 274,
     height: 49,
@@ -292,11 +308,12 @@ const styles = StyleSheet.create({
   loginText: {
     //fontFamily: "roboto-700",
     color: "#1f7ed3",
-    fontSize: 25,
+    fontSize: 20,
     height: 41,
-    width: 78,
-    marginTop: 7,
-    marginLeft: "40%",
+    width: 160,
+    marginTop: 10,
+    marginLeft: "25%",
+    alignItems: 'center'
   },
   imageStack: {
     height: 790,
