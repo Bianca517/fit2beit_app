@@ -1,58 +1,63 @@
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
+import { isEmpty } from "lodash";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Card, Title } from "react-native-paper";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { db } from "../../firebase";
+import { useEffect } from "react";
 
-const [UpperBodyVideoLinkFromDB, setUpperBodyVideoLinkFromDB] = useState("");
-const [OldestVideoIndex, setOldestVideoIndex] = useState("");
-
-const [UpperBodyVideoLink1, setUpperBodyVideoLink1] = useState("DHOPWvO3ZcI");
-const [UpperBodyVideoLink2, setUpperBodyVideoLink2] = useState("mm47bCaCzpQ");
-const [UpperBodyVideoLink3, setUpperBodyVideoLink3] = useState("RPbscYct3I4");
-
-async function getUpperBodyWorkoutLink() {
-  const snapshot = await db.collection("Workouts").get();
-  if (snapshot.docs("upper_body").data["workoutLink"].length() === 0) {
-    setOldestVideoIndex(0);
-  } else {
-    snapshot.docs.map(doc =>
-      setUpperBodyVideoLinkFromDB(doc.data()["workoutLink"].toString())
-    );
-    if (OldestVideoIndex === 3) {
-      setOldestVideoIndex(1);
-    } else {
-      setOldestVideoIndex(OldestVideoIndex + 1);
-    }
-  }
-}
-
-function mapVideoLink1() {
-  if (OldestVideoIndex === 1) {
-    getUpperBodyWorkoutLink();
-    setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
-  }
-  return UpperBodyVideoLink1;
-}
-
-function mapVideoLink2() {
-  if (OldestVideoIndex === 2) {
-    getUpperBodyWorkoutLink();
-    setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
-  }
-  return UpperBodyVideoLink2;
-}
-
-function mapVideoLink3() {
-  if (OldestVideoIndex === 3) {
-    getUpperBodyWorkoutLink();
-    setUpperBodyVideoLink3(UpperBodyVideoLinkFromDB);
-  }
-  return UpperBodyVideoLink3;
-}
+var OldestVideoIndex = 1;
 
 const UpperBody = () => {
+  //const [UpperBodyVideoLinkFromDB, setUpperBodyVideoLinkFromDB] = useState("");
+
+  let UpperBodyVideoLinkFromDB = "";
+  const [UpperBodyVideoLink1, setUpperBodyVideoLink1] = useState("DHOPWvO3ZcI");
+  const [UpperBodyVideoLink2, setUpperBodyVideoLink2] = useState("mm47bCaCzpQ");
+  const [UpperBodyVideoLink3, setUpperBodyVideoLink3] = useState("RPbscYct3I4");
+
+  async function getUpperBodyWorkoutLink() {
+    const snapshot = await db.collection("Workouts").get();
+
+    snapshot.docs.map(doc => {
+      if (!isEmpty(doc)) {
+        UpperBodyVideoLinkFromDB = doc.data()["workoutLink"].toString();
+      }
+    });
+
+    console.warn("apel");
+    console.warn("old " + OldestVideoIndex);
+
+    if (
+      !(
+        UpperBodyVideoLinkFromDB in
+        [UpperBodyVideoLink1, UpperBodyVideoLink2, UpperBodyVideoLink3]
+      )
+    ) {
+      if (OldestVideoIndex === 1) {
+        setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
+      } else if (OldestVideoIndex === 2) {
+        setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
+        console.warn("aici");
+      } else {
+        setUpperBodyVideoLink3(UpperBodyVideoLinkFromDB);
+      }
+
+      if (OldestVideoIndex === 3) {
+        OldestVideoIndex = 1;
+      } else {
+        OldestVideoIndex++;
+      }
+
+      console.warn("old2 " + OldestVideoIndex);
+    }
+  }
+
+  useEffect(() => {
+    getUpperBodyWorkoutLink();
+  }, []);
+
   return (
     <Card
       style={{
@@ -65,19 +70,31 @@ const UpperBody = () => {
       <Card.Content style={{ marginTop: -20 }}>
         <Title>Video 1</Title>
         <View>
-          <YoutubePlayer height={180} play={false} videoId={mapVideoLink1()} />
+          <YoutubePlayer
+            height={180}
+            play={false}
+            videoId={UpperBodyVideoLink1}
+          />
         </View>
       </Card.Content>
       <Card.Content style={{ marginTop: 10 }}>
         <Title>Video 2</Title>
         <View>
-          <YoutubePlayer height={180} play={false} videoId={"mm47bCaCzpQ"} />
+          <YoutubePlayer
+            height={180}
+            play={false}
+            videoId={UpperBodyVideoLink2}
+          />
         </View>
       </Card.Content>
       <Card.Content style={{ marginTop: 20 }}>
         <Title>Video 3</Title>
         <View>
-          <YoutubePlayer height={180} play={false} videoId={"RPbscYct3I4"} />
+          <YoutubePlayer
+            height={180}
+            play={false}
+            videoId={UpperBodyVideoLink3}
+          />
         </View>
       </Card.Content>
     </Card>
