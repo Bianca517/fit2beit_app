@@ -8,14 +8,17 @@ import { db } from "../../firebase";
 import { useEffect } from "react";
 
 var OldestVideoIndex = 1;
+var UpperBodyVideoLink1 = "DHOPWvO3ZcI";
+var UpperBodyVideoLink2 = "mm47bCaCzpQ";
+var UpperBodyVideoLink3 = "RPbscYct3I4";
 
-const UpperBody = () => {
+function UpperBody() {
   //const [UpperBodyVideoLinkFromDB, setUpperBodyVideoLinkFromDB] = useState("");
 
   let UpperBodyVideoLinkFromDB = "";
-  const [UpperBodyVideoLink1, setUpperBodyVideoLink1] = useState("DHOPWvO3ZcI");
-  const [UpperBodyVideoLink2, setUpperBodyVideoLink2] = useState("mm47bCaCzpQ");
-  const [UpperBodyVideoLink3, setUpperBodyVideoLink3] = useState("RPbscYct3I4");
+  //const [UpperBodyVideoLink1, setUpperBodyVideoLink1] = useState("DHOPWvO3ZcI");
+  //const [UpperBodyVideoLink2, setUpperBodyVideoLink2] = useState("mm47bCaCzpQ");
+  //const [UpperBodyVideoLink3, setUpperBodyVideoLink3] = useState("RPbscYct3I4");
 
   async function getUpperBodyWorkoutLink() {
     const snapshot = await db.collection("Workouts").get();
@@ -26,22 +29,29 @@ const UpperBody = () => {
       }
     });
 
-    console.warn("apel");
-    console.warn("old " + OldestVideoIndex);
+    console.warn(
+      "apel " +
+        UpperBodyVideoLink1 +
+        " " +
+        UpperBodyVideoLink2 +
+        " " +
+        UpperBodyVideoLink3
+    );
+    console.warn("old " + UpperBodyVideoLinkFromDB);
 
-    if (
-      !(
-        UpperBodyVideoLinkFromDB in
-        [UpperBodyVideoLink1, UpperBodyVideoLink2, UpperBodyVideoLink3]
-      )
-    ) {
+    var links = [UpperBodyVideoLink1, UpperBodyVideoLink2, UpperBodyVideoLink3];
+
+    if (links.indexOf(UpperBodyVideoLinkFromDB) < 0) {
+      console.warn("in if");
       if (OldestVideoIndex === 1) {
-        setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
+        //setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
+        UpperBodyVideoLink1 = UpperBodyVideoLinkFromDB;
       } else if (OldestVideoIndex === 2) {
-        setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
-        console.warn("aici");
+        //setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
+        UpperBodyVideoLink2 = UpperBodyVideoLinkFromDB;
       } else {
-        setUpperBodyVideoLink3(UpperBodyVideoLinkFromDB);
+        //setUpperBodyVideoLink3(UpperBodyVideoLinkFromDB);
+        UpperBodyVideoLink3 = UpperBodyVideoLinkFromDB;
       }
 
       if (OldestVideoIndex === 3) {
@@ -50,13 +60,14 @@ const UpperBody = () => {
         OldestVideoIndex++;
       }
 
-      console.warn("old2 " + OldestVideoIndex);
+      //console.warn("old2 " + OldestVideoIndex);
     }
   }
 
   useEffect(() => {
     getUpperBodyWorkoutLink();
   }, []);
+  //getUpperBodyWorkoutLink();
 
   return (
     <Card
@@ -99,7 +110,7 @@ const UpperBody = () => {
       </Card.Content>
     </Card>
   );
-};
+}
 
 export default UpperBody;
 
