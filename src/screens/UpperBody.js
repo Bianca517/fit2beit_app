@@ -23,13 +23,14 @@ function UpperBody() {
   async function getUpperBodyWorkoutLink() {
     const snapshot = await db.collection("Workouts").get();
 
-    snapshot.docs.map(doc => {
+    snapshot.docs.filter(doc => doc.id == "upper_body").map(doc => {
       if (!isEmpty(doc)) {
         UpperBodyVideoLinkFromDB = doc.data()["workoutLink"].toString();
+        console.warn("mjmmkjm UpperBodyVideoLinkFromDB " + UpperBodyVideoLinkFromDB);
       }
     });
 
-    console.warn(
+    /*console.warn(
       "apel " +
         UpperBodyVideoLink1 +
         " " +
@@ -37,14 +38,15 @@ function UpperBody() {
         " " +
         UpperBodyVideoLink3
     );
-    console.warn("old " + UpperBodyVideoLinkFromDB);
+    console.warn("old " + UpperBodyVideoLinkFromDB);*/
 
     var links = [UpperBodyVideoLink1, UpperBodyVideoLink2, UpperBodyVideoLink3];
 
     if (links.indexOf(UpperBodyVideoLinkFromDB) < 0) {
-      console.warn("in if");
+      //console.warn("in if");
       if (OldestVideoIndex === 1) {
         //setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
+        console.warn("aici nu intra prima data???");
         UpperBodyVideoLink1 = UpperBodyVideoLinkFromDB;
       } else if (OldestVideoIndex === 2) {
         //setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
@@ -66,6 +68,7 @@ function UpperBody() {
 
   useEffect(() => {
     getUpperBodyWorkoutLink();
+    console.warn("ceva");
   }, []);
   //getUpperBodyWorkoutLink();
 
