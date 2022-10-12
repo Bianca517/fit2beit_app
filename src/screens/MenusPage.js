@@ -91,7 +91,7 @@ const Schedule = ({ navigation }) => {
       <Agenda
         items={items}
         loadItemsForMonth={loadItems}
-        selected={"2022-05-31"}
+        selected={"2022-10-14"}
         renderItem={renderItem}
       />
     </View>

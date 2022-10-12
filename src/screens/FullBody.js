@@ -2,8 +2,50 @@ import React from 'react'
 import {StyleSheet, Text, View} from "react-native";
 import {Card, Title} from 'react-native-paper'
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { useEffect } from "react";
+import { db } from "../../firebase";
+import { isEmpty } from "lodash";
 
-const FullBody = () => {
+var OldestVideoIndex3 = 1;
+var FullBodyVideoLink1 = "ZeJLIdQenTo";
+var FullBodyVideoLink2 = "R6gZoAzAhCg";
+var FullBodyVideoLink3 = "gnTzk1yUHB4";
+
+function FullBody() {
+    let FullBodyVideoLinkFromDB = "";
+  
+    async function getFullBodyWorkoutLink() {
+      const snapshot = await db.collection("Workouts").get();
+  
+      snapshot.docs.filter(doc => doc.id == "full_body").map(doc => {
+        if (!isEmpty(doc)) {
+            FullBodyVideoLinkFromDB = doc.data()["workoutLink"].toString();
+        }
+      });
+  
+      var links = [FullBodyVideoLink1, FullBodyVideoLink2, FullBodyVideoLink3];
+  
+      if (links.indexOf(FullBodyVideoLinkFromDB) < 0) {
+        if (OldestVideoIndex3 === 1) {
+            FullBodyVideoLink1 = FullBodyVideoLinkFromDB;
+        } else if (OldestVideoIndex3 === 2) {
+            FullBodyVideoLink2 = FullBodyVideoLinkFromDB;
+        } else {
+            FullBodyVideoLink3 = FullBodyVideoLinkFromDB;
+        }
+  
+        if (OldestVideoIndex3 === 3) {
+          OldestVideoIndex3 = 1;
+        } else {
+          OldestVideoIndex3++;
+        }
+      }
+    }
+  
+    useEffect(() => {
+      getFullBodyWorkoutLink();
+    }, []);
+  
    return (
        <Card style = {{padding: 17, margin:8, backgroundColor: "#e7e6bb", borderRadius:20,  }}>
        <Card.Content style = {{marginTop:-20}}>
@@ -12,7 +54,7 @@ const FullBody = () => {
                 <YoutubePlayer
                     height={180}
                     play={false}
-                    videoId={'ZeJLIdQenTo'}
+                    videoId={FullBodyVideoLink1}
                 />
             </View>
        </Card.Content>
@@ -22,7 +64,7 @@ const FullBody = () => {
                 <YoutubePlayer
                     height={180}
                     play={false}
-                    videoId={'R6gZoAzAhCg'}
+                    videoId={FullBodyVideoLink2}
                 />
             </View>
        </Card.Content>
@@ -32,7 +74,7 @@ const FullBody = () => {
                 <YoutubePlayer
                     height={180}
                     play={false}
-                    videoId={'gnTzk1yUHB4'}
+                    videoId={FullBodyVideoLink3}
                 />
             </View>
         </Card.Content>
