@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View, LogBox} from "react-native";
 import {Card, Title} from 'react-native-paper'
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { useEffect } from "react";
@@ -12,6 +12,9 @@ var LowerBodyVideoLink2 = "X0xt0fYTZv8";
 var LowerBodyVideoLink3 = "8-PjpUH8TcE";
 
 function LowerBody() {
+  useEffect(() => {
+    LogBox.ignoreLogs(["Possible Unhandled Promise Rejection"]);
+  }, []);
   let LowerBodyVideoLinkFromDB = "";
 
   async function getLowerBodyWorkoutLink() {

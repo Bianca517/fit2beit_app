@@ -107,7 +107,7 @@ const LoginPage = ({ navigation }) => {
                   dataDetector="address"
                   placeholderTextColor="rgba(255,255,255,1)"
                   color="rgba(255,255,255,1)"
-                  clearTextOnFocus={true}
+                  //clearTextOnFocus={true}
                   secureTextEntry={true}
                   selectionColor="rgba(230, 230, 230,1)"
                   onChangeText={value => setPassword(value)}
@@ -120,7 +120,7 @@ const LoginPage = ({ navigation }) => {
                   textBreakStrategy="simple"
                   dataDetector="address"
                   placeholderTextColor="rgba(255,255,255,1)"
-                  clearTextOnFocus={true}
+                 //clearTextOnFocus={true}
                   selectionColor="rgba(230, 230, 230,1)"
                   onChangeText={value => setEmail(value)}
                   value={email}

@@ -1,7 +1,7 @@
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 import { isEmpty } from "lodash";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, LogBox } from "react-native";
 import { Card, Title } from "react-native-paper";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { db } from "../../firebase";
@@ -14,7 +14,9 @@ var UpperBodyVideoLink3 = "RPbscYct3I4";
 
 function UpperBody() {
   //const [UpperBodyVideoLinkFromDB, setUpperBodyVideoLinkFromDB] = useState("");
-
+  useEffect(() => {
+    LogBox.ignoreLogs(["Possible Unhandled Promise Rejection"]);
+  }, []);
   let UpperBodyVideoLinkFromDB = "";
   //const [UpperBodyVideoLink1, setUpperBodyVideoLink1] = useState("DHOPWvO3ZcI");
   //const [UpperBodyVideoLink2, setUpperBodyVideoLink2] = useState("mm47bCaCzpQ");
@@ -26,7 +28,7 @@ function UpperBody() {
     snapshot.docs.filter(doc => doc.id == "upper_body").map(doc => {
       if (!isEmpty(doc)) {
         UpperBodyVideoLinkFromDB = doc.data()["workoutLink"].toString();
-        console.warn("mjmmkjm UpperBodyVideoLinkFromDB " + UpperBodyVideoLinkFromDB);
+        //console.warn("mjmmkjm UpperBodyVideoLinkFromDB " + UpperBodyVideoLinkFromDB);
       }
     });
 
@@ -38,7 +40,7 @@ function UpperBody() {
         " " +
         UpperBodyVideoLink3
     );
-    console.warn("old " + UpperBodyVideoLinkFromDB);*/
+    //console.warn("old " + UpperBodyVideoLinkFromDB);*/
 
     var links = [UpperBodyVideoLink1, UpperBodyVideoLink2, UpperBodyVideoLink3];
 
@@ -46,7 +48,7 @@ function UpperBody() {
       //console.warn("in if");
       if (OldestVideoIndex === 1) {
         //setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
-        console.warn("aici nu intra prima data???");
+        //console.warn("aici nu intra prima data???");
         UpperBodyVideoLink1 = UpperBodyVideoLinkFromDB;
       } else if (OldestVideoIndex === 2) {
         //setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
@@ -68,7 +70,7 @@ function UpperBody() {
 
   useEffect(() => {
     getUpperBodyWorkoutLink();
-    console.warn("ceva");
+    //console.warn("ceva");
   }, []);
   //getUpperBodyWorkoutLink();
 

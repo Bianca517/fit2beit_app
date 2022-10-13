@@ -53,8 +53,8 @@ const TrainerPage = ({ navigation }) => {
         .catch(err => 0);
 
       if (workoutLink.length > 0 || menu.length > 0)
-        Alert.alert("Succesfully added workouts & menus!");
-      else Alert.alert("You cannout submit both entry fields!");
+        Alert.alert("Succesfully added workouts!");
+      //else Alert.alert("You cannout submit both entry fields!");
     }
   }
 
@@ -75,15 +75,15 @@ const TrainerPage = ({ navigation }) => {
               style={styles.image}
               imageStyle={styles.image_imageStyle}
             >
-              <Text style={styles.title}>Add Your Workouts &amp; Menus</Text>
+              <Text style={styles.title}>Add Your Workouts</Text>
               <TextInput
-                placeholder="Add A Menu"
-                placeholderTextColor="rgba(0,0,0,1)"
-                multiline={true}
-                value={menu}
-                onChangeText={value => setMenu(value)}
-                style={styles.placeholder}
-              ></TextInput>
+            placeholder="Insert Workout Link"
+            placeholderTextColor="rgba(0,0,0,1)"
+            multiline={false}
+            value={workoutLink}
+            onChangeText={value => setWorkoutLink(value)}
+            style={styles.placeholder1}
+          ></TextInput>
               <View style={styles.button5}>
                 <TouchableOpacity
                   onPress={() => navigation.navigate("Log In")}
@@ -94,14 +94,7 @@ const TrainerPage = ({ navigation }) => {
               </View>
             </ImageBackground>
           </View>
-          <TextInput
-            placeholder="Insert Workout Link"
-            placeholderTextColor="rgba(0,0,0,1)"
-            multiline={false}
-            value={workoutLink}
-            onChangeText={value => setWorkoutLink(value)}
-            style={styles.placeholder1}
-          ></TextInput>
+          
           <Picker
             selectedValue={selectedWorkout}
             onValueChange={itemValue => {
@@ -142,9 +135,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   group: {
-    width: 254,
-    height: 166,
-    marginTop: 85,
+    width: 250,
+    height: 60,
+    marginTop: 80,
     marginLeft: 61,
   },
   image: {
@@ -159,9 +152,9 @@ const styles = StyleSheet.create({
     color: "#121212",
     height: 166,
     width: 254,
-    fontSize: 40,
+    fontSize: 35,
     marginTop: 104,
-    marginLeft: 167,
+    marginLeft: 290,
   },
   placeholder: {
     //fontFamily: "roboto-regular",
@@ -190,17 +183,17 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderColor: "#000000",
     borderWidth: 4,
-    marginTop: 130,
-    marginLeft: 47,
+    marginTop: 10,
+    marginLeft: 175,
   },
   workoutsPicker: {
-    marginTop: -30,
+    marginTop: 140,
     marginLeft: -5,
   },
   submitButton: {
-    marginTop: 600,
-    left: 105,
-    width: 150,
+    marginTop: 480,
+    left: 125,
+    width: 130,
     height: 49,
     position: "absolute",
     backgroundColor: "#E6E6E6",
@@ -211,18 +204,18 @@ const styles = StyleSheet.create({
   submitText: {
     //fontFamily: "roboto-700",
     color: "#000",
-    fontSize: 20,
+    fontSize: 21,
     height: 41,
     width: 160,
     marginTop: 10,
-    marginLeft: "29%",
+    marginLeft: "24.5%",
     alignItems: "center",
   },
   button5: {
-    marginTop: 320,
-    marginLeft: 130,
+    marginTop: 350,
+    marginLeft: 370,
     borderRadius: 100,
-    marginRight: 305,
+    marginRight: 50,
     padding: 10,
     backgroundColor: "#a3bacf",
     alignItems: "center",
