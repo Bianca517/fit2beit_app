@@ -51,10 +51,12 @@ const TrainerPage = ({ navigation }) => {
             });
         })
         .catch(err => 0);
-
-      if (workoutLink.length > 0 || menu.length > 0)
-        Alert.alert("Succesfully added workouts!");
+        
       //else Alert.alert("You cannout submit both entry fields!");
+    }
+    if (workoutLink != undefined){
+      //console.warn("aici");
+      Alert.alert("Succesfully added workouts!");
     }
   }
 
