@@ -25,12 +25,14 @@ function UpperBody() {
   async function getUpperBodyWorkoutLink() {
     const snapshot = await db.collection("Workouts").get();
 
-    snapshot.docs.filter(doc => doc.id == "upper_body").map(doc => {
-      if (!isEmpty(doc)) {
-        UpperBodyVideoLinkFromDB = doc.data()["workoutLink"].toString();
-        //console.warn("mjmmkjm UpperBodyVideoLinkFromDB " + UpperBodyVideoLinkFromDB);
-      }
-    });
+    snapshot.docs
+      .filter(doc => doc.id == "upper_body")
+      .map(doc => {
+        if (!isEmpty(doc)) {
+          UpperBodyVideoLinkFromDB = doc.data()["workoutLink"].toString();
+          //console.warn("mjmmkjm UpperBodyVideoLinkFromDB " + UpperBodyVideoLinkFromDB);
+        }
+      });
 
     /*console.warn(
       "apel " +
@@ -48,7 +50,6 @@ function UpperBody() {
       //console.warn("in if");
       if (OldestVideoIndex === 1) {
         //setUpperBodyVideoLink1(UpperBodyVideoLinkFromDB);
-        //console.warn("aici nu intra prima data???");
         UpperBodyVideoLink1 = UpperBodyVideoLinkFromDB;
       } else if (OldestVideoIndex === 2) {
         //setUpperBodyVideoLink2(UpperBodyVideoLinkFromDB);
@@ -63,8 +64,6 @@ function UpperBody() {
       } else {
         OldestVideoIndex++;
       }
-
-      //console.warn("old2 " + OldestVideoIndex);
     }
   }
 

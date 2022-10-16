@@ -20,7 +20,7 @@ import { db } from "../../firebase";
 const fileUri = "../assets/trainer/text.txt";
 
 const TrainerPage = ({ navigation }) => {
-  const [selectedWorkout, setSelectedWorkout] = useState();
+  const [selectedWorkout, setSelectedWorkout] = useState("upper_body");
   const [workoutLink, setWorkoutLink] = useState();
   const [menu, setMenu] = useState();
 
@@ -51,12 +51,12 @@ const TrainerPage = ({ navigation }) => {
             });
         })
         .catch(err => 0);
-        
+
       //else Alert.alert("You cannout submit both entry fields!");
     }
-    if (workoutLink != undefined){
+    if (workoutLink != undefined) {
       //console.warn("aici");
-      Alert.alert("Succesfully added workouts!");
+      Alert.alert("Succesfully added workout!");
     }
   }
 
@@ -79,13 +79,13 @@ const TrainerPage = ({ navigation }) => {
             >
               <Text style={styles.title}>Add Your Workouts</Text>
               <TextInput
-            placeholder="Insert Workout Link"
-            placeholderTextColor="rgba(0,0,0,1)"
-            multiline={false}
-            value={workoutLink}
-            onChangeText={value => setWorkoutLink(value)}
-            style={styles.placeholder1}
-          ></TextInput>
+                placeholder="Insert Workout Link"
+                placeholderTextColor="rgba(0,0,0,1)"
+                multiline={false}
+                value={workoutLink}
+                onChangeText={value => setWorkoutLink(value)}
+                style={styles.placeholder1}
+              ></TextInput>
               <View style={styles.button5}>
                 <TouchableOpacity
                   onPress={() => navigation.navigate("Log In")}
@@ -96,7 +96,7 @@ const TrainerPage = ({ navigation }) => {
               </View>
             </ImageBackground>
           </View>
-          
+
           <Picker
             selectedValue={selectedWorkout}
             onValueChange={itemValue => {
