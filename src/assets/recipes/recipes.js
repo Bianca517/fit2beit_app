@@ -1,5 +1,5 @@
 const recipes = {
-  "Paste cu sos de creveti": {
+  "Pasta with shrimp sauce": {
     id: 1,
     name: "Spaghetti With Shrimp Sauce",
     image: require("../images/menus/mealPlan0/lunch.jpg"),
@@ -53,7 +53,7 @@ const recipes = {
     Simple, easy to make, and delicious tasting! \n\
     …and Buon Appetito!\n",
   },
-  "Pui malaesian cu satay": {
+  "Malaysian chicken": {
     id: 2,
     name: "Malaysian Chicken Satay",
     image: require("../images/menus/mealPlan1/lunch.jpg"),
